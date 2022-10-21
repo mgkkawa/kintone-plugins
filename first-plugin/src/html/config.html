@@ -1,0 +1,26 @@
+<section class="settings">
+  <h2 class="settings-heading">first-plugin設定画面</h2>
+  <p class="kintoneplugin-desc">下記に入力したテキストを一覧画面に表示します。</p>
+  <form class="js-submit-settings">
+    <p class="kintoneplugin-row">
+      <label for="message">
+        テキスト:
+        <input type="text" class="js-text-message kintoneplugin-input-text">
+        <!-- <input type="select" class="js-text-message kintoneplugin-dropdown" value="-----"> -->
+        <select class="kintoneplugin-dropdown" required disabled>
+          <option value="" selected>-----</option>
+          <option value="1">等しい</option>
+          <option value="2">等しくない</option>
+          <option value="3">以上</option>
+          <option value="4">超</option>
+          <option value="5">以下</option>
+          <option value="6">未満</option>
+        </select>
+      </label>
+    </p>
+    <p class="kintoneplugin-row">
+        <button type="button" class="js-cancel-button kintoneplugin-button-dialog-cancel">キャンセル</button>
+        <button class="kintoneplugin-button-dialog-ok">保存</button>
+    </p>
+  </form>
+</section>
