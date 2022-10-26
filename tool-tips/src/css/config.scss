@@ -188,10 +188,10 @@
     #formArea-outer {
       #formArea_0 {
         select {
-          margin-right: 10px;
+          margin-right: 5px;
         }
         input {
-          margin-right: 10px;
+          margin-right: 5px;
         }
       }
       .formArea {
@@ -208,12 +208,11 @@
           color: #3498db;
           font-size: 13px;
           cursor: pointer;
-          margin-right: 15px;
+          margin-right: 9px;
           margin-bottom: 15px;
         }
         input {
           padding: 5px;
-
           width: 40%;
           max-width: 200px;
           height: 38px;
@@ -221,7 +220,7 @@
           background-color: #f7f9fa;
           box-shadow: 1px 1px 1px #fff inset;
           text-overflow: ellipsis;
-          margin-right: 15px;
+          margin-right: 9px;
           margin-bottom: 15px;
         }
         .delete-btn {
@@ -251,6 +250,7 @@
     .add-btn {
       position: relative;
       cursor: pointer;
+      margin-top: 20px;
       padding: 5px;
       background-color: #f5f5f5;
       font-size: 15px;
