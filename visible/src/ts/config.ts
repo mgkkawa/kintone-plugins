@@ -19,7 +19,7 @@ jQuery.noConflict()
       {
         app: kintone.app.getId()
       },
-      function (resp) {
+      resp => {
         for (let key in resp.properties) {
           if (!resp.properties.hasOwnProperty(key)) {
             continue
@@ -34,9 +34,11 @@ jQuery.noConflict()
           if (typeof conf['name'] !== 'undefined' && code === conf['name']) confFlg = true
 
           if (confFlg) {
-            $('#name_code').prepend('<option name=' + code + ' selected>' + label + '</option>')
+            $('#visible_field').prepend('<option name=' + code + ' selected>' + label + '</option>')
+            $('#terms_field').prepend('<option name=' + code + ' selected>' + label + '</option>')
           } else {
-            $('#name_code').append('<option name=' + code + '>' + label + '</option>')
+            $('#visible_field').append('<option name=' + code + '>' + label + '</option>')
+            $('#terms_field').append('<option name=' + code + '>' + label + '</option>')
           }
           // if (prop.type === 'SINGLE_LINE_TEXT') {
           //   if (typeof conf['name'] !== 'undefined' && code === conf['name']) {

@@ -1,42 +1,65 @@
-
 <div>
   <div class="block">
-      <label class="kintoneplugin-label">
-      <span id ="container_label">イベント名フィールド</span>
+    <label class="kintoneplugin-label">
+      <span id="container_label">切り替えフィールド設定</span>
       <span class="kintoneplugin-require">*</span>
-  </label>
-      <div class="kintoneplugin-row">イベント名として使用する文字列フィールドのフィールド名を選択して下さい。</div>
-      <div class="kintoneplugin-select-outer">
-          <div class="kintoneplugin-select">
-              <select id="name_code">
-              </select>
-          </div>
-      </div>
+    </label>
+    <div class="kintoneplugin-row">切り替え設定をするフィールドを選択。</div>
+    <table class="kintoneplugin-table">
+      <thead>
+        <tr>
+          <th class="kintoneplugin-table-th"><span class="title">表示切替フィールド<span
+                class="kintoneplugin-require">*</span></span></th>
+          <th class="kintoneplugin-table-th"><span class="title">条件フィールド</span></th>
+          <th class="kintoneplugin-table-th"><span class="title">詳細条件</span></th>
+          <th class="kintoneplugin-table-th-blankspace"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="kintoneplugin-table-td-control">
+              <div class="kintoneplugin-table-td-control-value">
+                <div class="kintoneplugin-select-outer">
+                  <div class="kintoneplugin-select">
+                    <select id="visible_field">
+                      <option name="undefined" selected>-----</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="kintoneplugin-table-td-control">
+              <div class="kintoneplugin-table-td-control-value">
+                <div class="kintoneplugin-select-outer">
+                  <div class="kintoneplugin-select">
+                    <select id="terms_field">
+                      <option name="undefined" selected>-----</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="kintoneplugin-input-outer">
+              <input class="kintoneplugin-input-text" type="text"
+                style="margin-left: 10px; margin-top: 3px; width: 90%;">
+            </div>
+          </td>
+          <td class="kintoneplugin-table-td-operation">
+            <button type="button" class="kintoneplugin-button-add-row-image" title="Add row"></button>
+            <button type="button" class="kintoneplugin-button-remove-row-image" title="Delete this row"></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  <div class="block">
-      <label class="kintoneplugin-label">
-      <span id ="container_label">開始日時フィールド</span>
-      <span class="kintoneplugin-require">*</span>
-  </label>
-      <div class="kintoneplugin-row">イベント開始日時として使用する日時フィールドのフィールド名を選択して下さい。</div>
-      <div class="kintoneplugin-select-outer">
-          <div class="kintoneplugin-select">
-              <select id="start_datetime_code">
-              </select>
-          </div>
-      </div>
-  </div>
-  <div class="block">
-      <label class="kintoneplugin-label">
-      <span id ="container_label">終了日時フィールド</span>
-      <span class="kintoneplugin-require">*</span>
-  </label>
-      <div class="kintoneplugin-row">イベント終了日時として使用する日時フィールドのフィールド名を選択して下さい。</div>
-      <div class="kintoneplugin-select-outer">
-          <div class="kintoneplugin-select">
-              <select id="end_datetime_code">
-              </select>
-          </div>
-      </div>
+  <div class="footer">
+    <div class="kintoneplugin-row"></div>
+    <button class="kintoneplugin-button-dialog-cancel">キャンセル</button>
+    <button class="kintoneplugin-button-dialog-ok">保存</button>
   </div>
 </div>
