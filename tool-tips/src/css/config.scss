@@ -1,0 +1,274 @@
+.settings-heading {
+  padding: 1em 0;
+}
+
+.div-unit {
+  margin-top: 50px;
+  .block {
+    margin-bottom: 50px;
+    .kintoneplugin-label {
+      display: flex;
+      // #container_label {
+      //   z-index: 50;
+      // }
+      .balloon-outer {
+        position: relative;
+        width: 200px;
+        height: 0;
+        z-index: 50;
+        
+        .kintoneplugin-require {
+          cursor: pointer;
+
+          &:hover + .balloon {
+            opacity: 1;
+          }
+        }
+        // .balloon {
+        //   position: relative;
+        //   margin-left: 40px;
+        //   // padding: 15px;
+        //   background: #3498db;
+        //   border-radius: 30px;
+        //   display: table;
+        //   width: auto;
+        //   // bottom: 15px;
+        //   top: -15px;
+        //   left: 10px;
+        //   opacity: 0;
+        //   transition-duration: .5s;
+
+        //   &::before {
+        //     content: "";
+        //     position: absolute;
+        //     left: -38px;
+        //     width: 13px;
+        //     height: 12px;
+        //     top: 0;
+        //     background: #1797ec;
+        //     border-radius: 50%;
+        //   }
+
+        //   &::after {
+        //     content: "";
+        //     position: absolute;
+        //     left: -24px;
+        //     width: 20px;
+        //     height: 18px;
+        //     top: 3px;
+        //     background: #1797ec;
+        //     border-radius: 50%;
+        //   }
+
+        //   p {
+        //     color: #ffffff;
+        //     margin: 0;
+        //     padding: 12px;
+        //     font-size: 12px;
+        //   }
+        // }
+
+        // .balloon2 {
+        //   position: relative;
+        //   background-color: #1797ec;
+        //   color: #ffffff;
+        //   border-radius:15px;
+        //   width: 200px;
+        //   top: 5px;
+        //   z-index: 30;
+        //   opacity: 0;
+        //   transition-duration: .5s;
+
+        //   &::before {
+        //     content: '';
+        //     position: absolute;
+        //     display: block;
+        //     width: 0;
+        //     height: 0;
+        //     border-radius: 50%;
+        //     transform: rotate(45deg);
+        //     left: -5px;
+        //     top: -15px;
+        //     border-left: 20px solid transparent;
+        //     border-top: 20px solid #1797ec;
+        //     border-right: 20px solid transparent;
+        //     border-bottom: 20px solid transparent;
+        //   }
+
+        //   &::after {
+        //     content: '';
+        //     position: absolute;
+        //     display: block;
+        //     width: 0;
+        //     height: 0;
+        //     border-radius: 50%;
+        //     transform: rotate(45deg);
+        //     left: -12px;
+        //     top: -17px;
+        //     border-left: 17px solid transparent;
+        //     border-top: 17px solid #ffffff;
+        //     border-right: 17px solid transparent;
+        //     border-bottom: 17px solid transparent;
+        //   }
+
+        //   p {
+        //     color: #ffffff;
+        //     margin: 0;
+        //     padding: 12px;
+        //     font-size: 12px;
+        //   }
+
+        // }
+
+        // .balloon2 {
+        //   display: inline-block;
+        //   position: relative; 
+        //   margin-top: -46px;
+        //   margin-left: 25px;
+        //   padding: 12px;
+        //   border-radius: 12px;
+        //   background: #d7ebfe;
+        //   outline: 1.5px solid #1797ec;
+        //   // border: 1.5px solid #1797ec;
+        //   // opacity: 0;
+        //   transition-duration: .5s;
+
+        //   &::after {
+        //     content: "";
+        //     display: inline-block;
+        //     position: absolute;
+        //     top: 18px; 
+        //     left: -23px;
+        //     border: 12px solid transparent;
+        //     border-right: 12px solid #d7ebfe;
+        //   }
+
+        //   p {
+        //     font-size: 12px;
+        //     margin: 0;
+        //     padding: 0;
+        //   }
+        // }
+
+        .balloon {
+          display: table;
+          padding: 12px;
+          position: relative;
+          margin-top: -39px;
+          left: 15px;
+          background-color: #d7ebfe;
+          //borderにborder-radiusが効かないためoutlineで対応
+          // border: 1.5px solid #1797ec;
+          outline: 1.5px solid #1797ec;
+          border-radius: 20px;
+          margin-left: 1.5em;
+          opacity: 0;
+
+          &::before, &::after {
+            content: '';
+	          position: absolute;
+            top: 15px;
+            left: -1.5em;
+            border-top: 8px solid transparent;
+            border-right: 1.5em solid #1797ec;
+            border-bottom: 8px solid transparent;
+          }
+
+          &::after {
+            left: calc( 4px - 1.5em );
+            border-right: solid 1.5em #d7ebfe;
+          }
+          p {
+            padding: 12px;
+          }
+        }
+      }
+    }
+
+    #formArea-outer {
+      #formArea_0 {
+        select {
+          margin-right: 5px;
+        }
+        input {
+          margin-right: 5px;
+        }
+      }
+      .formArea {
+        width: 100%;
+        margin-bottom: 15px;
+        flex-direction: column;
+        select {
+          width: 40%;
+          max-width: 200px;
+          height: 48px;
+          border: 1px solid #e3e7e8;
+          background-color: #f7f9fa;
+          box-shadow: 1px 1px 1px #fff inset;
+          color: #3498db;
+          font-size: 13px;
+          cursor: pointer;
+          margin-right: 9px;
+          margin-bottom: 15px;
+        }
+        input {
+          padding: 5px;
+          width: 40%;
+          max-width: 200px;
+          height: 38px;
+          border: 1px solid #e3e7e8;
+          background-color: #f7f9fa;
+          box-shadow: 1px 1px 1px #fff inset;
+          text-overflow: ellipsis;
+          margin-right: 9px;
+          margin-bottom: 15px;
+        }
+        .delete-btn {
+          padding: 5px;
+          cursor: pointer;
+          background-color: #ff9d9d;
+          border: solid 1px #333;
+          outline: none;
+          box-shadow: 0 4px 5px 0px #333;
+          transition: all .2s ease;  
+          font-size: 15px;
+          border-radius: 10px;
+          letter-spacing: .2em;
+          font-weight: bold;
+          &:hover {
+            border-color: transparent;
+            background-color: #ff5c5c;
+            color: #ffffff;
+            box-shadow: none;
+            // hoverしたらY軸に4pxずらす
+            transform: translateY(2px);  
+          }
+        }
+      }
+    }
+
+    .add-btn {
+      position: relative;
+      cursor: pointer;
+      margin-top: 20px;
+      padding: 5px;
+      background-color: #f5f5f5;
+      font-size: 15px;
+      border-radius: 10px;
+      border: solid 1px #333;
+      outline: none;
+      box-shadow: 0 4px 5px 0px #333;
+      transition: all .2s ease;
+      &:hover {
+        border-color: transparent;
+        background-color: #5a5a5a;
+        color: #ffffff;
+        box-shadow: none;
+        // hoverしたらY軸に4pxずらす
+        transform: translateY(2px);
+      }
+    }
+
+
+  }
+}
