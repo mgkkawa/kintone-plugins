@@ -35,6 +35,7 @@ jQuery.noConflict()
         id: 'history-appId',
         label: '履歴アプリ',
         items: items,
+        requiredIcon: true,
       })
     )
     .append(
@@ -45,6 +46,7 @@ jQuery.noConflict()
         id: 'history-token',
         visible: true,
         disabled: false,
+        requiredIcon: true,
       })
     )
     .append(
@@ -64,7 +66,7 @@ jQuery.noConflict()
   historySubmit.on('click', async e => {
     e.preventDefault()
     if (!historyApp.val() || !historyToken.val()) {
-      await swal.fire({ text: 'アプリIDとトークンそろってないよ。' })
+      await swal.fire({ text: 'アプリとトークンそろってないよ。' })
       return
     }
 
@@ -75,7 +77,7 @@ jQuery.noConflict()
     config.history = JSON.stringify(appConfig)
 
     kintone.plugin.app.setConfig({ history: JSON.stringify(appConfig) }, async () => {
-      await swal.fire('コール履歴情報を登録しました。')
+      await swal.fire({ text: 'コール履歴情報を登録しました。' })
       location.reload()
     })
   })
