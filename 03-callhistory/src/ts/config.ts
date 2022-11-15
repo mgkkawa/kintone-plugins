@@ -17,11 +17,6 @@ jQuery.noConflict()
     if (typeof config[key] === 'string') config[key] = parse(config[key])
   }
   console.log(config)
-  // if (config.history) {
-  //   kintone.plugin.app.setConfig({}, () => {
-  //     location.reload()
-  //   })
-  // }
 
   if (!config.isGuest) config.isGuest = Boolean(await plugins.checkGuestSpace())
   if (!config.spaceId) config.spaceId = await plugins.getGuestSpaceId(config.appId)
@@ -37,29 +32,16 @@ jQuery.noConflict()
   await historySettings
     .append(
       new Dropdown({
-        // className: '',
-        // error: '',
         id: 'history-appId',
         label: '履歴アプリ',
-        // value: value,
-        // selectedIndex: 0,
-        // disabled: false,
-        // requiredIcon: false,
-        // visible: true,
         items: items,
       })
     )
     .append(
       new Text({
         label: '履歴アプリAPIトークン',
-        // requiredIcon: true,
-        // value: value,
         placeholder: 'コール履歴アプリのAPIトークンを入力。',
-        // prefix: '$',
-        // suffix: 'yen',
         textAlign: 'left',
-        // error: 'Error occurred!',
-        // className: 'options-class',
         id: 'history-token',
         visible: true,
         disabled: false,
@@ -69,7 +51,6 @@ jQuery.noConflict()
       new Button({
         text: '保存',
         type: 'submit',
-        // className: 'options-class',
         id: 'history-submit',
         visible: true,
         disabled: false,
@@ -138,24 +119,6 @@ jQuery.noConflict()
         })
       )
   })
-
-  // const settings = {}
-  // const length = CALLHISTORY_DEFAULT.length
-  // let i = 1
-  // let historyName = await $('#callhistory-name-' + i)
-  // if (historyName.length == 0) historyName = await $('#callhistory-name-' + i)
-  // let appName = await $('#call-app-name-' + i)
-
-  // settings[i] = { history: historyName.val(), app: appName.val() }
-  // while (i < length) {
-  //   ++i
-  //   historyName = await $('#callhistory-name-' + i)
-  //   appName = await $('#call-app-name-' + i)
-  //   settings[i] = { history: historyName.val(), app: appName.val() }
-  // }
-
-  // config.settings = settings
-  // console.log(await config)
 
   $submit.on('click', async e => {
     e.preventDefault()

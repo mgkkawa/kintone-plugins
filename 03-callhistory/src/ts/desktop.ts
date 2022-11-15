@@ -6,8 +6,6 @@ jQuery.noConflict()
   'use strict'
 
   kintone.events.on(['app.record.create.submit.success', 'app.record.edit.submit.success'], async event => {
-    // ['app.record.create.submit.success', 'app.record.edit.submit.success']
-    // ['app.record.detail.show', 'app.record.create.show', 'app.record.edit.show']
     const record = event.record
     if (record['編集ステータス'].value) return
 
@@ -68,7 +66,5 @@ jQuery.noConflict()
           allowEscapeKey: false,
         })
       })
-
-    // const url
   })
 })(jQuery, kintone.$PLUGIN_ID)
