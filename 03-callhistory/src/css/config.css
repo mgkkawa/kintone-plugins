@@ -1,0 +1,55 @@
+.settings-heading {
+  padding: 1em 0;
+}
+
+.kintoneplugin-input-text {
+  width: 16em;
+  margin-bottom: 1em;
+}
+
+/* js側 */
+#pop-up-html{
+  text-align: left;
+}
+
+.original-field-label{
+  font: size 18px; ;
+  width: 20em;
+  margin: auto;
+}
+
+/* html側 */
+.kintoneplugin-row{
+  margin-top: 2em;
+}
+
+.config-label{
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #e2f2fe;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.config-description{
+  color: darkgray;
+}
+
+.input-form-label{
+  font-weight: bold;
+  display: block;
+  margin-right: 4em;
+}
+
+input#callhistory-appId{
+  width: 120px;
+}
+input#callhistory-token{
+  width: 450px;
+}
+
+button#callhistory-submit-button{
+  font-weight: bold;
+  margin-left: 2em;
+  margin-top: 0.5em;
+}

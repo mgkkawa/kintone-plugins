@@ -1,0 +1,47 @@
+<section class="settings">
+  <h2 class="settings-heading">履歴保存プラグイン 設定画面</h2>
+  <p class="kintoneplugin-desc">必要項目の設定をお願いします。</p>
+  <div class="plugin-config-row"> </div>
+  <form class="js-submit-settings">
+    <table class="kintoneplugin-input-outer">
+      <tbody>
+        <tr>
+          <div class="config-label">履歴保存アプリ設定</div>
+          <div class="kintoneplugin-desc">履歴アプリ側の設定</div>
+        </tr>
+        <tr>
+          <th>
+            <label class="input-form-label" for="callhistory-appId">履歴アプリID</label>
+            <input class="kintoneplugin-input-text" type="text" id="callhistory-appId" maxlength="3" pattern="^[0-9]+$"
+              placeholder="半角数字3桁">
+          </th>
+          <th>
+            <label class="input-form-label" for="callhistory-token">履歴アプリトークン</label>
+            <input class="kintoneplugin-input-text" type="text" id="callhistory-token" pattern="^[a-zA-z0-9]+$">
+          </th>
+          <th>
+            <button class="kintoneplugin-button-dialog-ok" id="callhistory-submit-button">履歴アプリ情報保存</button>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+    <table id="config-table">
+      <tbody>
+        <tr>
+          <div class="config-label" id="config-label">コールアプリ設定</div>
+          <div class="kintoneplugin-desc" id="config-desc">コールアプリ側の設定</div>
+        </tr>
+        <tr class="fields">
+          <th>
+            <label class="input-form-label" id="app-config">履歴アプリ側フィールド</label>
+            <button class="kintoneplugin-button-normal">ボタン</button>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+    <div class="kintoneplugin-row">
+      <button type="button" class="js-cancel-button kintoneplugin-button-dialog-cancel">キャンセル</button>
+      <button class="kintoneplugin-button-dialog-ok" id="app-submit">保存</button>
+    </div>
+  </form>
+</section>
