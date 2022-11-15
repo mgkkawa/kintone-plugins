@@ -23,6 +23,8 @@ jQuery.noConflict()
   //   })
   // }
 
+  if (!config.isGuest) config.isGuest = Boolean(await plugins.checkGuestSpace())
+  if (!config.spaceId) config.spaceId = await plugins.getGuestSpaceId(config.appId)
   const inSpaceApps = await plugins.getApps(config.appId)
   const items = []
   inSpaceApps.forEach(app => {
@@ -44,7 +46,7 @@ jQuery.noConflict()
         // disabled: false,
         // requiredIcon: false,
         // visible: true,
-        items: items
+        items: items,
       })
     )
     .append(
@@ -60,7 +62,7 @@ jQuery.noConflict()
         // className: 'options-class',
         id: 'history-token',
         visible: true,
-        disabled: false
+        disabled: false,
       })
     )
     .append(
@@ -70,7 +72,7 @@ jQuery.noConflict()
         // className: 'options-class',
         id: 'history-submit',
         visible: true,
-        disabled: false
+        disabled: false,
       })
     )
 
@@ -87,7 +89,7 @@ jQuery.noConflict()
 
     const appConfig = {
       appId: historyApp.val(),
-      token: historyToken.val()
+      token: historyToken.val(),
     }
     config.history = JSON.stringify(appConfig)
 
@@ -124,7 +126,7 @@ jQuery.noConflict()
           className: 'callhistory-name',
           id: 'callhistory-name-' + num,
           value: field,
-          disabled: true
+          disabled: true,
         })
       )
       .append(
@@ -132,7 +134,7 @@ jQuery.noConflict()
           className: 'call-app-name',
           id: 'call-app-name-' + num,
           items: plugins.getItems(fields),
-          value: field
+          value: field,
         })
       )
   })
@@ -166,7 +168,7 @@ jQuery.noConflict()
     let appName = await $('#call-app-name-' + i)
 
     settings[i] = { history: historyName.val(), app: appName.val() }
-    while (i <= length) {
+    while (i < length) {
       ++i
       historyName = await $('#callhistory-name-' + i)
       appName = await $('#call-app-name-' + i)
@@ -178,7 +180,7 @@ jQuery.noConflict()
 
     kintone.plugin.app.setConfig(await plugins.checkConfig(config), async () => {
       await swal.fire({
-        html: 'プラグイン設定が更新されました。<br>アプリを更新してください。'
+        html: 'プラグイン設定が更新されました。<br>アプリを更新してください。',
       })
       window.location.href = '../../flow?app=' + kintone.app.getId()
     })

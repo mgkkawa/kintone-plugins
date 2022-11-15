@@ -20,7 +20,7 @@ export const getGuestSpaceId = async appId => {
 export const getAppInfo = async appId => {
   return new Promise((resolve, reject) => {
     const body = {
-      'id': appId
+      'id': appId,
     }
     kintone.api(
       kintone.api.url('/k/v1/app', true),

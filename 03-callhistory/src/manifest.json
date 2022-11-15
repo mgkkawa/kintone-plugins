@@ -18,6 +18,7 @@
     "ja": "履歴保存"
   },
   "description": {
-    "en": "callhistory"
+    "en": "callhistory",
+    "ja": "各種コールアプリから、コール履歴保存用アプリへレコードを追加するプラグイン。"
   }
 }
