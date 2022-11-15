@@ -1,26 +1,28 @@
 import swal from 'sweetalert2'
+import * as plugins from '../../../modules/functions'
+import { parse } from '../modules'
 jQuery.noConflict()
-;(($, PLUGIN_ID) => {
+;(async ($, PLUGIN_ID) => {
   'use strict'
 
-  kintone.events.on('app.record.index.show', () => {
-    const config = kintone.plugin.app.getConfig(PLUGIN_ID)
+  kintone.events.on(['app.record.create.submit.success', 'app.record.edit.submit.success'], async () => {
+    const record = kintone.app.record.get().record
+    if (record['編集ステータス'].value) return
 
-    const spaceElement = kintone.app.getHeaderSpaceElement()
-    if (spaceElement === null) {
-      throw new Error('The header element is unavailable on this page')
+    const config = await plugins.getConfig(PLUGIN_ID)
+    for (let key in config) {
+      if (typeof config[key] === 'string') config[key] = parse(config[key])
     }
-    const fragment = document.createDocumentFragment()
-    const headingEl = document.createElement('h3')
-    const messageEl = document.createElement('p')
 
-    messageEl.classList.add('plugin-space-message')
-    messageEl.textContent = config.message
-    headingEl.classList.add('plugin-space-heading')
-    headingEl.textContent = 'Hello kintone plugin!'
+    const historyId = config.history.appId
+    const token = config.history.token
 
-    fragment.appendChild(headingEl)
-    fragment.appendChild(messageEl)
-    spaceElement.appendChild(fragment)
+    const fields = config.fields2
+    const keys = Object.keys(fields)
+    const body = {}
+
+    for (let key in config.settings) {
+      const setting = config.settings[key]
+    }
   })
 })(jQuery, kintone.$PLUGIN_ID)

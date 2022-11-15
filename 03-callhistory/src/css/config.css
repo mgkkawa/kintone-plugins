@@ -29,6 +29,7 @@
   background-color: #e2f2fe;
   margin-top: 1em;
   margin-bottom: 0.5em;
+  padding-right: inherit;
 }
 
 .config-description{
@@ -41,15 +42,31 @@
   margin-right: 4em;
 }
 
-input#callhistory-appId{
-  width: 120px;
+#history-appId{
+  /* width: 120px; */
+  margin-right: 2em;
 }
-input#callhistory-token{
+#history-token{
   width: 450px;
+  margin-right: 2em;
+}
+#history-submit{
+  margin-top: 1.5em;
 }
 
 button#callhistory-submit-button{
   font-weight: bold;
   margin-left: 2em;
   margin-top: 0.5em;
+}
+
+.callhistory-name{
+  margin-right: 1.5em;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+}
+.call-app-name{
+  margin-right: 1.5em;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
 }

@@ -7,7 +7,6 @@ export const getFields = async appId => {
     }
     return properties
   })
-  console.log(fields)
   return await fields
 }
 
