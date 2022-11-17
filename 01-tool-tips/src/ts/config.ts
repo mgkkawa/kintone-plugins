@@ -15,6 +15,7 @@ jQuery.noConflict()
   // }
   const config = getConfig(PLUGIN_ID)
   if (!config.appId) config.appId = kintone.app.getId()
+  console.log(config)
 
   const $submitButton = $('#config-submit')
   const $cancelButton = $('.js-cancel-button')
@@ -24,49 +25,134 @@ jQuery.noConflict()
   }
   const $configs = $('#configs')
   const items = getItems(config.fields, true)
-  $configs.append(
-    $('<tr>')
-      .append('<th>')
-      .append(new Dropdown({ items: items, className: 'middle-dropdown' }))
-      .append(new TextArea())
-      .append(
-        $('<td>')
-          .addClass('kintoneplugin-table-td-operation')
+
+  if (!config.settings) {
+    $configs.append(
+      $('<tr>').append(
+        $('<th>')
           .append(
-            $('<button type="button" title="Add row">')
-              .addClass('kintoneplugin-button-add-row-image')
-              .on('click', e => {})
+            $('<td>')
+              .append(new Dropdown({ items: items, className: 'middle-dropdown', selectedIndex: 0 }))
+              .append(new TextArea({ className: 'tips' }))
           )
           .append(
-            $('<button type="button" title="Delete this row">')
-              .addClass('kintoneplugin-button-remove-row-image')
-              .on('click', e => {})
+            $('<td>')
+              .addClass('kintoneplugin-table-td-operation')
+              .append(
+                $('<button type="button" title="Add row">')
+                  .addClass('kintoneplugin-button-add-row-image')
+                  .attr('id', 'add-row')
+              )
+              .append(
+                $('<button type="button" title="Delete this row">')
+                  .addClass('kintoneplugin-button-remove-row-image')
+                  .attr('id', 'delete-row')
+              )
           )
       )
-  )
-  // const fields = items.map(obj => obj.label).filter(value => value != '-----')
-  // fields.forEach((field, index) =>
-  //   $configs.append(
-  //     $('<tr>').append(
-  //       $('<th>')
-  //         .append(new Text({ value: field, disabled: true }))
-  //         .append(new TextArea({ className: 'textarea' }))
-  //     )
-  //   )
-  // )
-
+    )
+  } else {
+    for (let setting of config.settings) {
+      $configs.append(
+        $('<tr>').append(
+          $('<th>')
+            .append(
+              $('<td>')
+                .append(new Dropdown({ items: items, className: 'middle-dropdown', value: setting.field }))
+                .append(new TextArea({ className: 'tips', value: setting.tips }))
+            )
+            .append(
+              $('<td>')
+                .addClass('kintoneplugin-table-td-operation')
+                .append(
+                  $('<button type="button" title="Add row">')
+                    .addClass('kintoneplugin-button-add-row-image')
+                    .attr('id', 'add-row')
+                )
+                .append(
+                  $('<button type="button" title="Delete this row">')
+                    .addClass('kintoneplugin-button-remove-row-image')
+                    .attr('id', 'delete-row')
+                )
+            )
+        )
+      )
+    }
+    $configs.append(
+      $('<tr>').append(
+        $('<th>')
+          .append(
+            $('<td>')
+              .append(new Dropdown({ items: items, className: 'middle-dropdown', selectedIndex: 0 }))
+              .append(new TextArea({ className: 'tips' }))
+          )
+          .append(
+            $('<td>')
+              .addClass('kintoneplugin-table-td-operation')
+              .append(
+                $('<button type="button" title="Add row">')
+                  .addClass('kintoneplugin-button-add-row-image')
+                  .attr('id', 'add-row')
+              )
+              .append(
+                $('<button type="button" title="Delete this row">')
+                  .addClass('kintoneplugin-button-remove-row-image')
+                  .attr('id', 'delete-row')
+              )
+          )
+      )
+    )
+  }
   $submitButton.on('click', e => {
     e.preventDefault()
 
-    const textarea = $('.textarea')
-    console.log(textarea)
+    const fields = $('.middle-dropdown')
+    const texts = $('.tips')
+    const settings = []
+    fields.each((i, html) => {
+      const field = $(html).val()
+      const text = $(texts[i]).val()
+      if (!field || !text) return
+      settings.push({ field: field, tips: text })
+    })
+    config.settings = settings
 
-    kintone.plugin.app.setConfig(checkConfig(config), () => {
-      swal.fire({ html: 'プラグイン設定が保存されました。<br>アプリの更新も忘れずに！' })
+    kintone.plugin.app.setConfig(checkConfig(config), async () => {
+      await swal.fire({ html: 'プラグイン設定が保存されました。<br>アプリの更新も忘れずに！' })
       window.location.href = '../../flow?app=' + kintone.app.getId()
     })
   })
   $cancelButton.on('click', () => {
     window.location.href = '../../' + kintone.app.getId() + '/plugin/'
+  })
+  $(document).on('click', '#add-row', e => {
+    $configs.append(
+      $('<tr>').append(
+        $('<th>')
+          .append(
+            $('<td>')
+              .append(new Dropdown({ items: items, className: 'middle-dropdown', selectedIndex: 0 }))
+              .append(new TextArea({ className: 'tips' }))
+          )
+          .append(
+            $('<td>')
+              .addClass('kintoneplugin-table-td-operation')
+              .append(
+                $('<button type="button" title="Add row">')
+                  .addClass('kintoneplugin-button-add-row-image')
+                  .attr('id', 'add-row')
+              )
+              .append(
+                $('<button type="button" title="Delete this row">')
+                  .addClass('kintoneplugin-button-remove-row-image')
+                  .attr('id', 'delete-row')
+              )
+          )
+      )
+    )
+  })
+  $(document).on('click', '#delete-row', e => {
+    e.preventDefault()
+    $(e.target).parents('tr')[0].remove()
   })
 })(jQuery, kintone.$PLUGIN_ID)

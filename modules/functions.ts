@@ -1,5 +1,9 @@
 import { DELETE_KEYS } from '../03-callhistory/src/modules'
 
+export const replaceEnter = str => {
+  return str.replace(/\n|\r\n|\r/g, '<br>')
+}
+
 export const getFields = async appId => {
   const fields = await kintone.api(kintone.api.url('/k/v1/app/form/fields', true), 'GET', { app: appId }).then(resp => {
     const properties = resp.properties
@@ -41,7 +45,7 @@ export const getGuestSpaceId = async appId => {
 export const getAppInfo = async appId => {
   return new Promise((resolve, reject) => {
     const body = {
-      'id': appId
+      'id': appId,
     }
     kintone.api(
       kintone.api.url('/k/v1/app', true),

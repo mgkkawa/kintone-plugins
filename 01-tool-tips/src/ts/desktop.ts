@@ -1,9 +1,12 @@
+import { getConfig, replaceEnter } from '.'
+
 jQuery.noConflict()
 ;(($, PLUGIN_ID) => {
   'use strict'
 
   kintone.events.on('app.record.detail.show', () => {
-    const config = kintone.plugin.app.getConfig(PLUGIN_ID)
+    const config = getConfig(PLUGIN_ID)
+    console.log(config)
     const settings = config.settings
     const fields = settings.map(setting => setting.field)
 
@@ -18,12 +21,14 @@ jQuery.noConflict()
 
       if (!fields.includes(label.text())) return
       const index = fields.indexOf(text)
-      const tips = settings[index].tips
+      const tips = replaceEnter(settings[index].tips)
+
       label.append(
         $('<span>')
           .addClass('tips-icon')
           .attr('id', 'tool-tips-' + i)
-          .text('Θ')
+          // .attr('src', '../image/icon.png')
+          .text('(?)')
           .append($('<div>').addClass('baloon').html(tips).hide())
           .on({
             'mouseenter': function () {
@@ -31,7 +36,7 @@ jQuery.noConflict()
             },
             'mouseleave': function () {
               $(this).children('.baloon').fadeOut('fast')
-            }
+            },
           })
       )
 
