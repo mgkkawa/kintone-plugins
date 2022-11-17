@@ -1,5 +1,26 @@
 import { DELETE_KEYS } from '../03-callhistory/src/modules'
 
+export const getFields = async appId => {
+  const fields = await kintone.api(kintone.api.url('/k/v1/app/form/fields', true), 'GET', { app: appId }).then(resp => {
+    const properties = resp.properties
+    for (let key in properties) {
+      if (DELETE_KEYS.includes(key)) delete properties[key]
+    }
+    return properties
+  })
+  return await fields
+}
+
+export const checkAppId = appId => {
+  const num = Number(appId)
+  if (isNaN(num)) return false
+
+  const str = String(appId)
+  if (!(str.length === 3)) return false
+
+  return true
+}
+
 export const checkGuestSpace = async () => {
   const currentUrl = kintone.api.url('/k/v1/app', true)
   if (currentUrl.indexOf('guest') > -1) {
@@ -20,7 +41,7 @@ export const getGuestSpaceId = async appId => {
 export const getAppInfo = async appId => {
   return new Promise((resolve, reject) => {
     const body = {
-      'id': appId,
+      'id': appId
     }
     kintone.api(
       kintone.api.url('/k/v1/app', true),
@@ -74,18 +95,13 @@ export const checkConfig = config => {
   return config
 }
 
-export const getUnicode = str => {
-  const array = str.split('')
-  const res = array.map(value => value.codePointAt(0))
-}
-
-export const getItems = (fields, values = []) => {
+export const getItems = (fields, isField = false) => {
   const items = []
 
   for (let key in fields) {
     const field = fields[key]
-    if (DELETE_KEYS.includes(field.type) || values.includes(field.code)) continue
-    items.push({ label: field.label, value: field.code })
+    if (DELETE_KEYS.includes(field.type)) continue
+    items.push({ label: field.label, value: isField ? field.label : field.code })
   }
   items.sort((a, b) => {
     if (!a.label || !b.label) return true
@@ -105,7 +121,30 @@ export const getItems = (fields, values = []) => {
 
     return result
   })
+  items.unshift({ label: '-----', value: '-----' })
   return items
+}
+
+export const labelSort = fields => {
+  fields.sort((a, b) => {
+    if (!a.label || !b.label) return true
+    const _a = a.label.split('').map(value => value.codePointAt(0))
+    const _b = b.label.split('').map(value => value.codePointAt(0))
+
+    let check
+    let result
+    const array = _a
+    const target = _b
+
+    array.forEach((num, index) => {
+      if (check || !target[index] || num == target[index]) return
+      result = num - target[index]
+      check = true
+    })
+
+    return result
+  })
+  return fields
 }
 
 export const parse = s => {

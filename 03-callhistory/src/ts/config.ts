@@ -2,7 +2,7 @@ import swal from 'sweetalert2'
 import { Button, Dropdown, Text } from 'kintone-ui-component'
 import * as modules from '../modules'
 import * as plugins from '../../../modules/functions'
-import { CALLHISTORY_DEFAULT, parse } from '../modules'
+import { CALLHISTORY_DEFAULT } from '../modules'
 jQuery.noConflict()
 ;(async ($, PLUGIN_ID) => {
   ;('use strict')
@@ -14,7 +14,7 @@ jQuery.noConflict()
   if (!config.appId) config.appId = kintone.app.getId()
   if (typeof config.appId === 'string') config.appId = Number(config.appId)
   for (let key in config) {
-    if (typeof config[key] === 'string') config[key] = parse(config[key])
+    if (typeof config[key] === 'string') config[key] = plugins.parse(config[key])
   }
   console.log(config)
 
@@ -35,7 +35,7 @@ jQuery.noConflict()
         id: 'history-appId',
         label: '履歴アプリ',
         items: items,
-        requiredIcon: true,
+        requiredIcon: true
       })
     )
     .append(
@@ -46,7 +46,7 @@ jQuery.noConflict()
         id: 'history-token',
         visible: true,
         disabled: false,
-        requiredIcon: true,
+        requiredIcon: true
       })
     )
     .append(
@@ -55,7 +55,7 @@ jQuery.noConflict()
         type: 'submit',
         id: 'history-submit',
         visible: true,
-        disabled: false,
+        disabled: false
       })
     )
 
@@ -72,7 +72,7 @@ jQuery.noConflict()
 
     const appConfig = {
       appId: historyApp.val(),
-      token: historyToken.val(),
+      token: historyToken.val()
     }
     config.history = JSON.stringify(appConfig)
 
@@ -83,7 +83,7 @@ jQuery.noConflict()
   })
 
   if (!config.history) return
-  if (typeof config.history === 'string') config.history = parse(config.history)
+  if (typeof config.history === 'string') config.history = plugins.parse(config.history)
   const history = config.history
   historyApp.val(history.appId)
   historyToken.val(history.token)
@@ -91,7 +91,7 @@ jQuery.noConflict()
   $('#config-label').html('コールアプリ設定')
   $('#config-desc').html('コールアプリ側の設定<br>設定がなければ空白を保存します。')
 
-  if (!config.fields) config.fields = await modules.getFields(config.appId)
+  if (!config.fields) config.fields = await plugins.getFields(config.appId)
   if (!config.fields2) config.fields2 = await modules.getFields(history.appId)
   const fields = config.fields
 
@@ -109,7 +109,7 @@ jQuery.noConflict()
           className: 'callhistory-name',
           id: 'callhistory-name-' + num,
           value: field,
-          disabled: true,
+          disabled: true
         })
       )
       .append(
@@ -117,7 +117,7 @@ jQuery.noConflict()
           className: 'call-app-name',
           id: 'call-app-name-' + num,
           items: plugins.getItems(fields),
-          value: field,
+          value: field
         })
       )
   })
@@ -145,7 +145,7 @@ jQuery.noConflict()
 
     kintone.plugin.app.setConfig(await plugins.checkConfig(config), async () => {
       await swal.fire({
-        html: 'プラグイン設定が更新されました。<br>アプリを更新してください。',
+        html: 'プラグイン設定が更新されました。<br>アプリを更新してください。'
       })
       window.location.href = '../../flow?app=' + kintone.app.getId()
     })

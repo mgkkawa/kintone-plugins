@@ -14,11 +14,11 @@ const stylesHandler = MiniCssExtractPlugin.loader
 
 const config = {
   entry: {
-    config: './03-callhistory/src/ts/config.ts',
-    desktop: './03-callhistory/src/ts/desktop.ts'
+    config: './01-tool-tips/src/ts/config.ts',
+    desktop: './01-tool-tips/src/ts/desktop.ts'
   },
   output: {
-    path: path.resolve('./03-callhistory/src/', 'js')
+    path: path.resolve('./01-tool-tips/src/', 'js')
     // path: path.resolve(__dirname, 'dist')
   },
   plugins: [

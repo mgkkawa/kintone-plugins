@@ -1,6 +1,5 @@
 import swal from 'sweetalert2'
 import * as plugins from '../../../modules/functions'
-import { parse } from '../modules'
 jQuery.noConflict()
 ;(async ($, PLUGIN_ID) => {
   'use strict'
@@ -10,7 +9,7 @@ jQuery.noConflict()
 
     const config = await plugins.getConfig(PLUGIN_ID)
     for (let key in config) {
-      if (typeof config[key] === 'string') config[key] = parse(config[key])
+      if (typeof config[key] === 'string') config[key] = plugins.parse(config[key])
     }
 
     const SERIAL_NO = record.法人番号.value
@@ -24,7 +23,7 @@ jQuery.noConflict()
     const query = `法人番号 = "${SERIAL_NO}" and 案件名 = "${CASE_NAME}" and inout = "out" order by レコード番号 asc`
     const url = `${endpoint}?app=${appId}&query=${encodeURI(query)}&totalCount=true`
     const headers = {
-      'X-Cybozu-API-Token': token,
+      'X-Cybozu-API-Token': token
       // 'Content-Type': 'application/json',
     }
 
@@ -49,7 +48,7 @@ jQuery.noConflict()
 
     const config = await plugins.getConfig(PLUGIN_ID)
     for (let key in config) {
-      if (typeof config[key] === 'string') config[key] = parse(config[key])
+      if (typeof config[key] === 'string') config[key] = plugins.parse(config[key])
     }
 
     const history = config.history
@@ -70,12 +69,12 @@ jQuery.noConflict()
 
     const param = {
       app: appId,
-      record: body,
+      record: body
     }
 
     const headers = {
       'X-Cybozu-API-Token': token,
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     }
 
     const url = kintone.api.url('/k/v1/record', config.isGuest)
@@ -93,7 +92,7 @@ jQuery.noConflict()
           toast: true,
           position: 'top-end',
           showConfirmButton: false,
-          timer: 2500,
+          timer: 2500
         })
       })
       .catch(error => {
@@ -102,7 +101,7 @@ jQuery.noConflict()
           text: 'コメントにコールテーブルの情報を入力してください。',
           icon: 'warning',
           allowOutsideClick: false,
-          allowEscapeKey: false,
+          allowEscapeKey: false
         })
       })
   })

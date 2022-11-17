@@ -8,3 +8,40 @@
   margin: 0.8rem;
   margin-top: 0;
 }
+
+.tips-icon{
+  position: relative;
+  font-weight: bold;
+  margin-left: 0.4em;
+  margin-bottom: 25%;
+  /* font-size: smaller; */
+}
+
+.baloon {
+  width:fit-content;
+  padding:10px;
+  font-size:12px;
+  margin:-30px 0 0;
+  background-color:#666;
+  color:#fff;
+  position:absolute;
+  right:-230px;
+  top: 50%;
+  border-radius: 8px;
+  z-index: 2;
+  display: table;
+}
+.baloon::before {
+  width: auto;
+  right: 100%;
+  top: 2.3em;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  border-color: rgba(102, 102, 102, 0);
+  border-right-color: #5e5e5e;
+  border-width: 8px;
+  margin-top: -8px;
+}

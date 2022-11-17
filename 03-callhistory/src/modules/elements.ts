@@ -1,5 +1,5 @@
 import { Button, Dropdown, Text } from 'kintone-ui-component'
-import { DELETE_KEYS, getUnicode } from './index'
+import { DELETE_KEYS } from './index'
 
 export const callhistory = {
   list: function (items, value) {

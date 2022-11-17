@@ -9,13 +9,13 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./tool-tips/src/ts/desktop.ts":
-/*!*************************************!*\
-  !*** ./tool-tips/src/ts/desktop.ts ***!
-  \*************************************/
+/***/ "./01-tool-tips/src/ts/desktop.ts":
+/*!****************************************!*\
+  !*** ./01-tool-tips/src/ts/desktop.ts ***!
+  \****************************************/
 /***/ (() => {
 
-eval("jQuery.noConflict();\n(($, PLUGIN_ID) => {\n  'use strict';\n\n  kintone.events.on('app.record.index.show', () => {\n    const config = kintone.plugin.app.getConfig(PLUGIN_ID);\n    const spaceElement = kintone.app.getHeaderSpaceElement();\n    if (spaceElement === null) {\n      throw new Error('The header element is unavailable on this page');\n    }\n    const fragment = document.createDocumentFragment();\n    const headingEl = document.createElement('h3');\n    const messageEl = document.createElement('p');\n    messageEl.classList.add('plugin-space-message');\n    messageEl.textContent = config.message;\n    headingEl.classList.add('plugin-space-heading');\n    headingEl.textContent = 'Hello kintone plugin!';\n    fragment.appendChild(headingEl);\n    fragment.appendChild(messageEl);\n    spaceElement.appendChild(fragment);\n  });\n})(jQuery, kintone.$PLUGIN_ID);\n\n//# sourceURL=webpack:///./tool-tips/src/ts/desktop.ts?");
+eval("jQuery.noConflict();\n(($, PLUGIN_ID) => {\n  'use strict';\n\n  kintone.events.on('app.record.detail.show', () => {\n    const config = kintone.plugin.app.getConfig(PLUGIN_ID);\n    const settings = config.settings;\n    const fields = settings.map(setting => setting.field);\n    const gaia = $('#record-gaia');\n    const elements = gaia.children().children().children();\n    elements.each((i, element) => {\n      const elem = $(element);\n      const children = elem.children();\n      const label = $(children[0]);\n      const text = label.text();\n      if (!fields.includes(label.text())) return;\n      const index = fields.indexOf(text);\n      const tips = settings[index].tips;\n      label.append($('<span>').addClass('tips-icon').attr('id', 'tool-tips-' + i).text('Θ').append($('<div>').addClass('baloon').html(tips).hide()).on({\n        'mouseenter': function () {\n          $(this).children('.baloon').fadeIn('fast');\n        },\n        'mouseleave': function () {\n          $(this).children('.baloon').fadeOut('fast');\n        }\n      }));\n      console.log(label.children());\n    });\n  });\n})(jQuery, kintone.$PLUGIN_ID);\n\n//# sourceURL=webpack:///./01-tool-tips/src/ts/desktop.ts?");
 
 /***/ })
 
@@ -26,7 +26,7 @@ eval("jQuery.noConflict();\n(($, PLUGIN_ID) => {\n  'use strict';\n\n  kintone.e
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./tool-tips/src/ts/desktop.ts"]();
+/******/ 	__webpack_modules__["./01-tool-tips/src/ts/desktop.ts"]();
 /******/ 	
 /******/ })()
 ;

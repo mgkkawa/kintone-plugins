@@ -1,26 +1,67 @@
+import { checkConfig, getConfig, getFields, getItems } from '.'
 jQuery.noConflict()
-import { Button } from 'kintone-ui-component'
 import swal from 'sweetalert2'
-;(($, PLUGIN_ID) => {
+import { Button, Dropdown, Text, TextArea } from 'kintone-ui-component'
+;(async ($, PLUGIN_ID) => {
   'use strict'
+  // const config = {
+  //   settings: [
+  //     {
+  //       field: '完了ステータス',
+  //       tips: 'このフィールドの説明。<br>長さはどうかな？どこまでのびーる<br>長さはどうかな？どこまでのびーる<br>長さはどうかな？どこまでのびーる<br>長さはどうかな？どこまでのびーる<br>長さはどうかな？どこまでのびーる<br>長さはどうかな？どこまでのびーる<br>長さはどうかな？どこまでのびーる'
+  //     },
+  //     { field: '完了詳細', tips: 'このフィールドの説明。<br>長さはどうかな？どこまでのびーる' }
+  //   ]
+  // }
+  const config = getConfig(PLUGIN_ID)
+  if (!config.appId) config.appId = kintone.app.getId()
 
-  const form = new Button({ text: '保存', type: 'submit' })
-  const cancelButton = new Button({ text: 'キャンセル', type: 'normal' })
-  const $form = $('.js-submit-settings')
+  const $submitButton = $('#config-submit')
   const $cancelButton = $('.js-cancel-button')
-  const $message = $('.js-text-message')
-  console.log($form)
-  if (!($form.length > 0 && $cancelButton.length > 0 && $message.length > 0)) {
-    throw new Error('Required elements do not exist.')
+  if (!config.fields) {
+    const fields = await getFields(config.appId)
+    config.fields = fields
   }
-  const config = kintone.plugin.app.getConfig(PLUGIN_ID)
+  const $configs = $('#configs')
+  const items = getItems(config.fields, true)
+  $configs.append(
+    $('<tr>')
+      .append('<th>')
+      .append(new Dropdown({ items: items, className: 'middle-dropdown' }))
+      .append(new TextArea())
+      .append(
+        $('<td>')
+          .addClass('kintoneplugin-table-td-operation')
+          .append(
+            $('<button type="button" title="Add row">')
+              .addClass('kintoneplugin-button-add-row-image')
+              .on('click', e => {})
+          )
+          .append(
+            $('<button type="button" title="Delete this row">')
+              .addClass('kintoneplugin-button-remove-row-image')
+              .on('click', e => {})
+          )
+      )
+  )
+  // const fields = items.map(obj => obj.label).filter(value => value != '-----')
+  // fields.forEach((field, index) =>
+  //   $configs.append(
+  //     $('<tr>').append(
+  //       $('<th>')
+  //         .append(new Text({ value: field, disabled: true }))
+  //         .append(new TextArea({ className: 'textarea' }))
+  //     )
+  //   )
+  // )
 
-  if (config.message) {
-    $message.val(config.message)
-  }
-  $form.on('submit', e => {
+  $submitButton.on('click', e => {
     e.preventDefault()
-    kintone.plugin.app.setConfig({ message: $message.val() }, () => {
+
+    const textarea = $('.textarea')
+    console.log(textarea)
+
+    kintone.plugin.app.setConfig(checkConfig(config), () => {
       swal.fire({ html: 'プラグイン設定が保存されました。<br>アプリの更新も忘れずに！' })
       window.location.href = '../../flow?app=' + kintone.app.getId()
     })

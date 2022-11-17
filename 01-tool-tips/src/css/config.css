@@ -1,3 +1,28 @@
+.kintoneplugin-dummy{
+  display: none;
+}
+.kintoneplugin-desc{
+  color: darkgray;
+}
+
+.field-code{
+  /* margin-bottom: 1.8em; */
+  margin-right: 1em;
+}
+.richeditor-button{
+  /* margin-top: 1.8em; */
+  margin-left: 1em;
+  height: fit-content;
+}
+.tool-tips{
+  margin-left: 0.5em;
+  font-size: 8px;
+}
+.middle-dropdown{
+  margin-top: 40px;
+  margin-right: 1.2em;
+}
+/*  */
 .settings-heading {
   padding: 1em 0;
 }
