@@ -1,7 +1,7 @@
 import { checkConfig, getConfig, getFields, getItems } from '.'
-jQuery.noConflict()
 import swal from 'sweetalert2'
 import { Button, Dropdown, Text, TextArea } from 'kintone-ui-component'
+jQuery.noConflict()
 ;(async ($, PLUGIN_ID) => {
   'use strict'
   // const config = {
