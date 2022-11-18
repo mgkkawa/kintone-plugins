@@ -41,7 +41,7 @@ jQuery.noConflict()
         text: 'データ処理を実施しますか？',
         showCancelButton: true,
         confirmButtonText: 'はい',
-        cancelButtonText: 'いいえ'
+        cancelButtonText: 'いいえ',
       })
       if (check.isDismissed) return e
       const pushRecords = []
@@ -88,7 +88,7 @@ jQuery.noConflict()
           await postAll(latest.app, latest.token, pushRecords)
 
           swal.close()
-        }
+        },
       })
     })
   })
