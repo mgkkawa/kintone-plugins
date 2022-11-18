@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
+const directory = '03-callhistory'
 // const CompressionPlugin = require('compression-webpack-plugin')
 // const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
@@ -14,11 +15,11 @@ const stylesHandler = MiniCssExtractPlugin.loader
 
 const config = {
   entry: {
-    config: './01-tool-tips/src/ts/config.ts',
-    desktop: './01-tool-tips/src/ts/desktop.ts'
+    config: './' + directory + '/src/ts/config.ts',
+    desktop: './' + directory + '/src/ts/desktop.ts'
   },
   output: {
-    path: path.resolve('./01-tool-tips/src/', 'js')
+    path: path.resolve('./' + directory + '/src/', 'js')
     // path: path.resolve(__dirname, 'dist')
   },
   plugins: [

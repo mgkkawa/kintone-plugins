@@ -27,8 +27,7 @@ jQuery.noConflict()
         $('<span>')
           .addClass('tips-icon')
           .attr('id', 'tool-tips-' + i)
-          // .attr('src', '../image/icon.png')
-          .text('(?)')
+          .text('？')
           .append($('<div>').addClass('baloon').html(tips).hide())
           .on({
             'mouseenter': function () {
@@ -36,7 +35,7 @@ jQuery.noConflict()
             },
             'mouseleave': function () {
               $(this).children('.baloon').fadeOut('fast')
-            },
+            }
           })
       )
 
