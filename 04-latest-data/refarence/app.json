@@ -1,0 +1,18 @@
+{
+  "appId": "appId",
+  "code": "",
+  "name": "appname",
+  "description": "",
+  "createdAt": "createDateTime",
+  "creator": {
+    "code": "userid",
+    "name": "username"
+  },
+  "modifiedAt": "modifieDateTime",
+  "modifier": {
+    "code": "userid",
+    "name": "username"
+  },
+  "spaceId": "spaceId",
+  "threadId": "threadId"
+}

@@ -1,16 +1,20 @@
 <section class="settings">
-  <h2 class="settings-heading">Settings for 04-latest-data</h2>
-  <p class="kintoneplugin-desc">This message is displayed on the app page after the app has been updated.</p>
+  <h2 class="settings-heading">過去データやりとりアプリ</h2>
+  <p class="kintoneplugin-desc">過去データアプリとのデータやり取りや、データの初期化を実施するプラグイン。</p>
   <form class="js-submit-settings">
     <p class="kintoneplugin-row">
-      <label for="message">
-        Message:
-        <input type="text" class="js-text-message kintoneplugin-input-text">
-      </label>
+    <div class="config-label">過去データアプリ設定</div>
+    <div class="kintoneplugin-desc">過去データアプリ側の設定</div>
     </p>
+    <p class="kintoneplugin-row" id="container"></p>
+    <p class="kintoneplugin-row" id="app-settings" hidden="true">
+    <div class="config-label">データ初期化設定</div>
+    <div class="kintoneplugin-desc">データ初期化処理に使用するフィールドの設定</div>
+    </p>
+    <p class="kintoneplugin-row" id="plugin-settings"></p>
     <p class="kintoneplugin-row">
-        <button type="button" class="js-cancel-button kintoneplugin-button-dialog-cancel">Cancel</button>
-        <button class="kintoneplugin-button-dialog-ok">Save</button>
+      <button type="button" class="js-cancel-button kintoneplugin-button-dialog-cancel">キャンセル</button>
+      <button class="kintoneplugin-button-dialog-ok" id="submit-button">保存</button>
     </p>
   </form>
 </section>

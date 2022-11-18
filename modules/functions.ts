@@ -38,27 +38,15 @@ export const checkGuestSpace = async () => {
 
 export const getGuestSpaceId = async appId => {
   const appInfo = await getAppInfo(appId)
-  const guestSpaceId = appInfo['spaceId']
+  const guestSpaceId = appInfo.spaceId
   return guestSpaceId
 }
 
 export const getAppInfo = async appId => {
-  return new Promise((resolve, reject) => {
-    const body = {
-      'id': appId,
-    }
-    kintone.api(
-      kintone.api.url('/k/v1/app', true),
-      'GET',
-      body,
-      resp => {
-        resolve(resp)
-      },
-      error => {
-        reject(error)
-      }
-    )
-  })
+  return await kintone
+    .api(kintone.api.url('/k/v1/app', true), 'GET', { id: appId })
+    .then(resp => resp)
+    .catch(error => error)
 }
 
 export const getApps = async appId => {
@@ -97,6 +85,90 @@ export const checkConfig = config => {
   }
 
   return config
+}
+
+export const getRecords = (appId, offset = 0, limit = 500, opt_records = null) => {
+  // console.log(opt_records)
+  let allRecords = opt_records || []
+  const url = kintone.api.url('/k/v1/records', true)
+  const params = {
+    app: appId,
+    query: `order by レコード番号 asc limit ${limit} offset ${offset}`
+  }
+
+  return kintone
+    .api(url, 'GET', params)
+    .then(async resp => {
+      allRecords = allRecords.concat(resp.records)
+
+      // 取得件数が最大値と同じ→まだ取得できるレコードがあるということになるので、再帰呼び出しを行う
+      if (resp.records.length === limit) {
+        return await getRecords(appId, offset + limit, limit, allRecords)
+      }
+      return allRecords
+    })
+    .catch(error => {
+      console.error(error)
+    })
+}
+
+export const postAll = async (appId, token, records) => {
+  const post_records = []
+  const next_records = []
+  const headers = {
+    'X-Cybozu-API-Token': token,
+    'Content-Type': 'application/json'
+  }
+
+  records.forEach((record, index) => {
+    if (index < 100) {
+      post_records.push(record)
+    } else {
+      next_records.push(record)
+    }
+  })
+
+  const url = kintone.api.url('/k/v1/records', true)
+  const params = {
+    app: appId - 0,
+    records: post_records
+  }
+  console.log(params)
+  await kintone
+    .proxy(url, 'POST', headers, params)
+    .then(resp => resp)
+    .catch(error => console.error(JSON.parse(error).message))
+
+  if (next_records.length) {
+    await postAll(appId, headers, next_records)
+  }
+}
+
+export const putAll = async (appId, records) => {
+  const put_records = []
+  const next_records = []
+
+  records.forEach((record, index) => {
+    if (index < 100) {
+      put_records.push(record)
+    } else {
+      next_records.push(record)
+    }
+  })
+
+  const url = kintone.api.url('/k/v1/records', true)
+  const params = {
+    app: appId,
+    records: put_records
+  }
+  await kintone
+    .api(url, 'PUT', params)
+    .then(resp => resp)
+    .catch(error => console.error(JSON.parse(error).message))
+
+  if (next_records.length) {
+    putAll(appId, next_records)
+  }
 }
 
 export const getItems = (fields, isField = false) => {
