@@ -4,10 +4,12 @@ jQuery.noConflict()
 ;(async ($, PLUGIN_ID) => {
   'use strict'
 
-  kintone.events.on('app.record.edit.show', async event => {
+  // コール数・インバウンドコール数を調整。
+  kintone.events.on(['app.record.detail.show', 'app.record.edit.show'], async event => {
     const record = event.record
 
     const config = await plugins.getConfig(PLUGIN_ID)
+    if (!config.history) return event
     for (let key in config) {
       if (typeof config[key] === 'string') config[key] = plugins.parse(config[key])
     }
@@ -31,6 +33,7 @@ jQuery.noConflict()
       .proxy(url, 'GET', headers, {})
       .then(resp => {
         const object = JSON.parse(resp[0])
+        if (object.error) throw new Error(object.error)
         return object.totalCount - 0
       })
       .catch(resp => {
@@ -38,7 +41,27 @@ jQuery.noConflict()
         return 0
       })
 
-    record.コール数.value = count + 1
+    const query2 = `法人番号 = "${SERIAL_NO}" and 案件名 = "${CASE_NAME}" and inout = "in" order by レコード番号 asc`
+    const url2 = `${endpoint}?app=${appId}&query=${encodeURI(query2)}&totalCount=true`
+
+    const count2 = await kintone
+      .proxy(url2, 'GET', headers, {})
+      .then(resp => {
+        const object = JSON.parse(resp[0])
+        if (object.error) throw new Error(object.error)
+        return object.totalCount - 0
+      })
+      .catch(resp => {
+        console.log(resp)
+        return 0
+      })
+
+    const inbound = record.インバウンド.value.length
+    const outbound = inbound ? 0 : 1
+
+    record.コール数.value = count + outbound
+    record.インバウンドコール数.value = count2 + inbound
+
     return event
   })
 
@@ -47,9 +70,6 @@ jQuery.noConflict()
     if (record['編集ステータス'].value) return
 
     const config = await plugins.getConfig(PLUGIN_ID)
-    for (let key in config) {
-      if (typeof config[key] === 'string') config[key] = plugins.parse(config[key])
-    }
 
     const history = config.history
     const appId = history.appId

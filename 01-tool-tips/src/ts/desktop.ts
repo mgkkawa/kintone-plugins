@@ -4,9 +4,10 @@ jQuery.noConflict()
 ;(($, PLUGIN_ID) => {
   'use strict'
 
-  kintone.events.on('app.record.detail.show', () => {
+  kintone.events.on('app.record.detail.show', event => {
     const config = getConfig(PLUGIN_ID)
     console.log(config)
+    if (!config.app) return event
     const settings = config.settings
     const fields = settings.map(setting => setting.field)
 

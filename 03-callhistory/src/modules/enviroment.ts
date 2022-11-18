@@ -7,20 +7,20 @@ export const DELETE_KEYS = [
   'STATUS',
   'STATUS_ASSIGNEE',
   'REFERENCE_TABLE',
-  'MODIFIER',
+  'MODIFIER'
 ]
 
 export const ids = {
   config: {
     table: 'config-table',
-    desc: 'config-desc',
-  },
+    desc: 'config-desc'
+  }
 }
 
 export const configs = {
   table: 'config-table',
   desc: 'config-desc',
-  descText: '履歴保存アプリを設定してください。<br>設定後、コールアプリの設定をお願いします。',
+  descText: '履歴保存アプリを設定してください。<br>設定後、コールアプリの設定をお願いします。'
 }
 
 export const CALLHISTORY_DEFAULT = [
@@ -35,6 +35,7 @@ export const CALLHISTORY_DEFAULT = [
   '次回架電先',
   'MG担当者',
   'コールメモ',
+  '担当者取次',
   '完了ステータス',
   '完了詳細',
   'NG詳細',
@@ -42,5 +43,5 @@ export const CALLHISTORY_DEFAULT = [
   'ステータス1',
   'ステータス2',
   'ステータス3',
-  'ステータス4',
+  'ステータス4'
 ]
