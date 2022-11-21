@@ -40,7 +40,6 @@ jQuery.noConflict()
     return { label: app.name, value: app.appId }
   })
   items.unshift({ label: '-----', value: '-----' })
-  console.log(config)
 
   const apps = m.apps(items)
   const text = m.text
@@ -98,6 +97,7 @@ jQuery.noConflict()
   })
 
   if (!config.latest) return
+  console.log(config)
 
   const settings = {
     case: { field: '案件名', initial: config.app.name },

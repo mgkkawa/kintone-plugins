@@ -1,6 +1,6 @@
 {
-  "manifest_version": "1.01",
-  "version": "1.01",
+  "manifest_version": 2,
+  "version": 2,
   "type": "APP",
   "desktop": {
     "js": ["https://js.cybozu.com/jquery/3.3.1/jquery.min.js", "js/desktop.js"],
