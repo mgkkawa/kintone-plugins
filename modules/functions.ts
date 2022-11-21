@@ -4,6 +4,14 @@ export const replaceEnter = str => {
   return str.replace(/\n|\r\n|\r/g, '<br>')
 }
 
+export const getHeaders = (token, isContentType = false) => {
+  const headers = {
+    'X-Cybozu-API-Token': token
+  }
+  if (isContentType) headers['Content-Type'] = 'application/json'
+  return headers
+}
+
 export const getFields = async appId => {
   const fields = await kintone.api(kintone.api.url('/k/v1/app/form/fields', true), 'GET', { app: appId }).then(resp => {
     const properties = resp.properties
@@ -115,10 +123,7 @@ export const getRecords = (appId, offset = 0, limit = 500, opt_records = null) =
 export const postAll = async (appId, token, records) => {
   const post_records = []
   const next_records = []
-  const headers = {
-    'X-Cybozu-API-Token': token,
-    'Content-Type': 'application/json'
-  }
+  const headers = getHeaders(token, true)
 
   records.forEach((record, index) => {
     if (index < 100) {

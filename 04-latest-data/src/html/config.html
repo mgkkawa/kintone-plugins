@@ -1,17 +1,57 @@
 <section class="settings">
   <h2 class="settings-heading">過去データやりとりアプリ</h2>
   <p class="kintoneplugin-desc">過去データアプリとのデータやり取りや、データの初期化を実施するプラグイン。</p>
+
   <form class="js-submit-settings">
-    <p class="kintoneplugin-row">
-    <div class="config-label">過去データアプリ設定</div>
-    <div class="kintoneplugin-desc">過去データアプリ側の設定</div>
-    </p>
+    <div class="kintoneplugin-row">
+      <div class="config-label">過去データアプリ設定</div>
+      <div class="kintoneplugin-desc">過去データアプリ側の設定</div>
+      <p class="kintoneplugin-row" id="container"></p>
+    </div>
+
+    <p class="kintoneplugin-row"></p>
+
+    <div class="kintoneplugin-row" id="initial-label" hidden="true">
+      <div class="config-label">コールアプリ初期化設定</div>
+      <div class="kintoneplugin-desc">初期化が必要なフィールドとその値をセット。</div>
+    </div>
     <p class="kintoneplugin-row" id="container"></p>
-    <p class="kintoneplugin-row" id="app-settings" hidden="true">
-    <div class="config-label">データ初期化設定</div>
-    <div class="kintoneplugin-desc">データ初期化処理に使用するフィールドの設定</div>
-    </p>
+
+    <table class="kintoneplugin-table" hidden="true">
+      <thead>
+        <tr>
+          <th class="kintoneplugin-table-th"><span class="title">初期化フィールド</span></th>
+          <th class="kintoneplugin-table-th"><span class="title">初期値</span></th>
+          <th class="kintoneplugin-table-th-blankspace"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- <tr>
+          <td>
+            <div class="kintoneplugin-table-td-control">
+              <div class="kintoneplugin-table-td-control-value">
+                <div class="kintoneplugin-input-outer">
+                  <input class="kintoneplugin-input-text" type="text" />
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="kintoneplugin-table-td-control">
+              <div class="kintoneplugin-table-td-control-value">
+              </div>
+            </div>
+          </td>
+          <td class="kintoneplugin-table-td-operation">
+            <button type="button" class="kintoneplugin-button-add-row-image" title="Add row"></button>
+            <button type="button" class="kintoneplugin-button-remove-row-image" title="Delete this row"></button>
+          </td>
+        </tr> -->
+      </tbody>
+    </table>
+
     <p class="kintoneplugin-row" id="plugin-settings"></p>
+
     <p class="kintoneplugin-row">
       <button type="button" class="js-cancel-button kintoneplugin-button-dialog-cancel">キャンセル</button>
       <button class="kintoneplugin-button-dialog-ok" id="submit-button">保存</button>
