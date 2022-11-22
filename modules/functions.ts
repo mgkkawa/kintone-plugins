@@ -206,6 +206,16 @@ export const getItems = (fields, isField = false) => {
   return items
 }
 
+export const getOptions = (fields, isField) => {
+  const options = []
+
+  for (let key in fields) {
+    const field = fields[key]
+    if (DELETE_KEYS.includes(field.type)) continue
+    options.push({ label: field.label, value: isField ? field.label : field.code })
+  }
+}
+
 export const labelSort = fields => {
   fields.sort((a, b) => {
     if (!a.label || !b.label) return true
