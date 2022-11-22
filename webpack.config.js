@@ -7,7 +7,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const directory = '04-latest-data'
 // const CompressionPlugin = require('compression-webpack-plugin')
-// const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
 const isProduction = process.env.NODE_ENV == 'production'
 
@@ -56,13 +56,13 @@ const config = {
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.jsx', '.js', '...']
-    // plugins: [
-    //   new TsconfigPathsPlugin({
-    //     // tsconfig.json はデフォルト
-    //     configFile: 'tsconfig.json'
-    //   })
-    // ]
+    extensions: ['.tsx', '.ts', '.jsx', '.js', '...'],
+    plugins: [
+      new TsconfigPathsPlugin({
+        // tsconfig.json はデフォルト
+        configFile: 'tsconfig.json'
+      })
+    ]
   },
   performance: {
     maxAssetSize: 1000000,

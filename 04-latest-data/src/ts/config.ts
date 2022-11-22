@@ -2,6 +2,7 @@ import swal from 'sweetalert2'
 import * as kuc from 'kintone-ui-component'
 import * as m from '../../../modules'
 import * as tag from '../../../modules/modern-class'
+// import * as rest from '../../../modules/rest-body'
 
 jQuery.noConflict()
 ;(async ($, PLUGIN_ID) => {

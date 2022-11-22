@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2'
 import { DELETE_KEYS } from '../03-callhistory/src/modules'
 
 export const replaceEnter = str => {
@@ -162,17 +163,19 @@ export const putAll = async (appId, records) => {
   })
 
   const url = kintone.api.url('/k/v1/records', true)
+
   const params = {
     app: appId,
     records: put_records
   }
+
   await kintone
     .api(url, 'PUT', params)
     .then(resp => resp)
-    .catch(error => console.error(JSON.parse(error).message))
+    .catch(error => console.error(error))
 
   if (next_records.length) {
-    putAll(appId, next_records)
+    await putAll(appId, next_records)
   }
 }
 
@@ -254,4 +257,140 @@ export const parse = s => {
   s = s.replace(/[\u0000-\u0019]+/g, '')
 
   return JSON.parse(s)
+}
+
+export const post = async (appId, record) => {
+  const url = kintone.api.url('/k/v1/record', true)
+  const body = {
+    app: appId,
+    record: record
+  }
+  return await kintone.api(url, 'POST', body).catch(error => error)
+}
+
+export const allPost = async (appId, token, records) => {
+  const posts = []
+  const nexts = []
+  console.log(appId)
+
+  records.forEach((record, index) => {
+    index < 100 ? posts.push(record) : nexts.push(record)
+  })
+
+  console.log(appId)
+  const url = kintone.api.url('/k/v1/records', true)
+  const body = {
+    app: appId,
+    records: posts
+  }
+
+  await kintone
+    .proxy(url, 'POST', getHeaders(token, true), body)
+    .then(resp => {
+      const obj = JSON.parse(resp[0])
+      console.log(obj)
+      if (obj.message) throw new Error(obj)
+    })
+    .catch(async error => {
+      console.log(error)
+      const url = kintone.api.url('/k/v1/record', true)
+
+      for (let record of records) {
+        const body = {
+          app: appId,
+          record: record
+        }
+
+        await kintone
+          .proxy(url, 'POST', getHeaders(token, true), body)
+          .then(resp => {
+            const obj = JSON.parse(resp[0])
+            // console.log(obj)
+          })
+          .catch(error => {
+            const window = $(Swal.getHtmlContainer())
+            const html = window.html()
+            // console.log(html)
+          })
+      }
+    })
+
+  if (nexts.length) {
+    await allPost(appId, token, nexts)
+  }
+}
+
+export const allPuts = async (appId, records, updateKey) => {
+  const puts = []
+  const next = []
+
+  records.forEach((record, index) => {
+    const obj = {
+      updateKey: {
+        field: updateKey,
+        value: null
+      },
+      record: record
+    }
+
+    for (let key in record) {
+      if (key == updateKey) {
+        obj.updateKey.value = record[key].value
+        delete obj.record[key]
+        break
+      }
+    }
+
+    index < 100 ? puts.push(obj) : next.push(record)
+  })
+  const url = kintone.api.url('/k/v1/records', true)
+  const body = {
+    app: appId,
+    records: puts
+  }
+
+  await kintone
+    .api(url, 'PUT', body)
+    .then(resp => {
+      console.log('then')
+      console.log(resp)
+    })
+    .catch(async error => {
+      const row1 = '<div><b>レコードの更新が出来ませんでした。</b></div>'
+      const row2 = `<div>${error.message}</div>`
+      await Swal.fire({
+        icon: 'error',
+        html: row1 + row2
+      })
+      console.log(error)
+    })
+}
+
+export const allPosts = async (appId, records, token) => {
+  const posts = []
+  const next = []
+
+  records.forEach((record, index) => {
+    index < 100 ? posts.push(record) : next.push(record)
+  })
+
+  const url = kintone.api.url('/k/v1/records', true)
+  const body = { app: appId, records: posts }
+  const headers = getHeaders(token, true)
+
+  await kintone
+    .proxy(url, 'POST', headers, body)
+    .then(resp => {
+      const obj = JSON.parse(resp[0])
+      console.log(obj)
+      if (obj.message) throw new Error(JSON.stringify(obj))
+    })
+    .catch(error => {
+      error = JSON.parse(error.message)
+      const errors = error.errors
+      const records = errors.records
+      records.forEach(record => {
+        console.log(record)
+      })
+    })
 }
