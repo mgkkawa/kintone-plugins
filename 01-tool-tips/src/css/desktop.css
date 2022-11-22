@@ -9,33 +9,32 @@
   margin-top: 0;
 }
 
-.tips-icon{
-  /* display: inline-block; */
-  /* text-align: center; */
+.tips-icon {
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
   position: relative;
   font-weight: bold;
   margin-left: 0.4em;
-  margin-bottom: 25%;
   color: #fff;
   background-color: #5e5e5e;
-  height: 20px;
-  width: 20px;
+  height: 18px;
+  width: 18px;
   border-radius: 50%;
-  /* -moz-border-radius: 50%;
-  -webkit-border-radius: 50%; */
-  /* font-size: smaller; */
 }
 
 .baloon {
-  width:fit-content;
-  padding:10px;
-  font-size:12px;
-  margin:-30px 0 0;
-  background-color:#666;
-  color:#fff;
-  position:absolute;
-  right:-180px;
-  top: 50%;
+  position: absolute;
+  width: fit-content;
+  text-align: left;
+  vertical-align: top;
+  padding: 10px;
+  font-size: 12px;
+  margin: -30px 0 0;
+  background-color: #666;
+  color: #fff;
+  left: 30px;
+  top: 65%;
   border-radius: 8px;
   z-index: 2;
   display: table;
@@ -45,7 +44,7 @@
   right: 100%;
   top: 2.3em;
   border: solid transparent;
-  content: " ";
+  content: ' ';
   height: 0;
   width: 0;
   position: absolute;
