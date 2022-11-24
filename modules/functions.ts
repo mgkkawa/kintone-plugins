@@ -305,12 +305,10 @@ export const allPost = async (appId, token, records) => {
           .proxy(url, 'POST', getHeaders(token, true), body)
           .then(resp => {
             const obj = JSON.parse(resp[0])
-            // console.log(obj)
           })
           .catch(error => {
             const window = $(Swal.getHtmlContainer())
             const html = window.html()
-            // console.log(html)
           })
       }
     })
@@ -325,17 +323,19 @@ export const allPuts = async (appId, records, updateKey) => {
   const next = []
 
   records.forEach((record, index) => {
+    const stringify = JSON.stringify(record)
+    const record_ = JSON.parse(stringify)
     const obj = {
       updateKey: {
         field: updateKey,
         value: null
       },
-      record: record
+      record: record_
     }
 
-    for (let key in record) {
+    for (let key in record_) {
       if (key == updateKey) {
-        obj.updateKey.value = record[key].value
+        obj.updateKey.value = record_[key].value
         delete obj.record[key]
         break
       }
@@ -352,7 +352,6 @@ export const allPuts = async (appId, records, updateKey) => {
   await kintone
     .api(url, 'PUT', body)
     .then(resp => {
-      console.log('then')
       console.log(resp)
     })
     .catch(async error => {
@@ -367,6 +366,7 @@ export const allPuts = async (appId, records, updateKey) => {
 }
 
 export const allPosts = async (appId, records, token) => {
+  console.log(records)
   const posts = []
   const next = []
 
@@ -382,15 +382,41 @@ export const allPosts = async (appId, records, token) => {
     .proxy(url, 'POST', headers, body)
     .then(resp => {
       const obj = JSON.parse(resp[0])
-      console.log(obj)
       if (obj.message) throw new Error(JSON.stringify(obj))
     })
-    .catch(error => {
+    .catch(async error => {
       error = JSON.parse(error.message)
+      const posts2 = []
+      const puts = []
       const errors = error.errors
-      const records = errors.records
-      records.forEach(record => {
-        console.log(record)
+      const keys = Object.keys(errors).map(key => key.replace(/[^0-9]/g, ''))
+
+      posts.forEach((record, index) => {
+        keys.includes('' + index) ? puts.push(record) : posts2.push(record)
       })
+
+      const puts2 = puts.map(record => {
+        const serial = record.法人番号.value
+        delete record.法人番号
+        return {
+          updateKey: {
+            field: '法人番号',
+            value: serial
+          },
+          record: record
+        }
+      })
+
+      await allPosts(appId, posts2, token)
+
+      await kintone
+        .proxy(url, 'PUT', headers, { app: appId, records: puts2 })
+        .then(resp => {
+          resp = JSON.parse(resp[0])
+          if (resp.message) throw new Error(resp)
+        })
+        .catch(error => console.log(error))
     })
+
+  if (next.length) await allPosts(appId, next, token)
 }
