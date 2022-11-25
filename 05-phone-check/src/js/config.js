@@ -1,27 +1,32 @@
-jQuery.noConflict();
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
 
-(function($, PLUGIN_ID) {
-  'use strict';
+/***/ "./05-phone-check/src/ts/config.ts":
+/*!*****************************************!*\
+  !*** ./05-phone-check/src/ts/config.ts ***!
+  \*****************************************/
+/***/ (() => {
 
-  var $form = $('.js-submit-settings');
-  var $cancelButton = $('.js-cancel-button');
-  var $message = $('.js-text-message');
-  if (!($form.length > 0 && $cancelButton.length > 0 && $message.length > 0)) {
-    throw new Error('Required elements do not exist.');
-  }
-  var config = kintone.plugin.app.getConfig(PLUGIN_ID);
+eval("jQuery.noConflict();\n(() => {})();\n\n//# sourceURL=webpack:///./05-phone-check/src/ts/config.ts?");
 
-  if (config.message) {
-    $message.val(config.message);
-  }
-  $form.on('submit', function(e) {
-    e.preventDefault();
-    kintone.plugin.app.setConfig({message: $message.val()}, function() {
-      alert('The plug-in settings have been saved. Please update the app!');
-      window.location.href = '../../flow?app=' + kintone.app.getId();
-    });
-  });
-  $cancelButton.on('click', function() {
-    window.location.href = '../../' + kintone.app.getId() + '/plugin/';
-  });
-})(jQuery, kintone.$PLUGIN_ID);
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	var __webpack_exports__ = {};
+/******/ 	__webpack_modules__["./05-phone-check/src/ts/config.ts"]();
+/******/ 	
+/******/ })()
+;

@@ -84,5 +84,6 @@ jQuery.noConflict()
         allowEscapeKey: true
       })
     })
+    return event
   })
 })(jQuery, kintone.$PLUGIN_ID)

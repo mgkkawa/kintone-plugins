@@ -1,26 +1,32 @@
-jQuery.noConflict();
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
 
-(function($, PLUGIN_ID) {
-  'use strict';
+/***/ "./05-phone-check/src/ts/desktop.ts":
+/*!******************************************!*\
+  !*** ./05-phone-check/src/ts/desktop.ts ***!
+  \******************************************/
+/***/ (() => {
 
-  kintone.events.on('app.record.index.show', function() {
-    var config = kintone.plugin.app.getConfig(PLUGIN_ID);
+eval("jQuery.noConflict();\n(() => {})();\n\n//# sourceURL=webpack:///./05-phone-check/src/ts/desktop.ts?");
 
-    var spaceElement = kintone.app.getHeaderSpaceElement();
-    if (spaceElement === null) {
-      throw new Error('The header element is unavailable on this page');
-    }
-    var fragment = document.createDocumentFragment();
-    var headingEl = document.createElement('h3');
-    var messageEl = document.createElement('p');
+/***/ })
 
-    messageEl.classList.add('plugin-space-message');
-    messageEl.textContent = config.message;
-    headingEl.classList.add('plugin-space-heading');
-    headingEl.textContent = 'Hello kintone plugin!';
-
-    fragment.appendChild(headingEl);
-    fragment.appendChild(messageEl);
-    spaceElement.appendChild(fragment);
-  });
-})(jQuery, kintone.$PLUGIN_ID);
+/******/ 	});
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	var __webpack_exports__ = {};
+/******/ 	__webpack_modules__["./05-phone-check/src/ts/desktop.ts"]();
+/******/ 	
+/******/ })()
+;

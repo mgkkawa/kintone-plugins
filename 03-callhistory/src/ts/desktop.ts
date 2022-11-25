@@ -1,11 +1,11 @@
 import swal from 'sweetalert2'
-import * as plugins from '../../../modules/functions'
+import * as plugins from '../../../modules'
 jQuery.noConflict()
 ;(async ($, PLUGIN_ID) => {
   'use strict'
 
   // コール数・インバウンドコール数を調整。
-  kintone.events.on(['app.record.detail.show', 'app.record.edit.show'], async event => {
+  kintone.events.on(['app.record.edit.show'], async event => {
     const record = event.record
 
     const config = await plugins.getConfig(PLUGIN_ID)
@@ -61,6 +61,9 @@ jQuery.noConflict()
 
     record.コール数.value = count + outbound
     record.インバウンドコール数.value = count2 + inbound
+
+    const status = record.完了ステータス
+    if (status.value != '完了') status.value = '確認中'
 
     return event
   })

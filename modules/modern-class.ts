@@ -1,5 +1,4 @@
-jQuery.noConflict()
-
+import $ from 'jquery'
 export const div = '<div>'
 export const span = '<span>'
 export const p = '<p>'

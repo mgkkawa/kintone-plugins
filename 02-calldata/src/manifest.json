@@ -14,11 +14,10 @@
     "required_params": []
   },
   "name": {
-    "en": "05-phone-check",
-    "ja": "電話番号チェックプラグイン"
+    "en": "calldata",
+    "ja": "コールデータプラグイン"
   },
   "description": {
-    "en": "05-phone-check",
-    "ja": "電話番号をチェック。指定スペースフィールドにリンクを表示。"
+    "en": "calldata"
   }
 }
