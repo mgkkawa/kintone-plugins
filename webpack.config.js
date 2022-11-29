@@ -13,7 +13,8 @@ const plugin2 = '02-calldata'
 const plugin3 = '03-callhistory'
 const plugin4 = '04-latest-data'
 const plugin5 = '05-phone-check'
-const directory = plugin1
+const plugin6 = '06-create-link'
+const directory = plugin6
 
 const isProduction = process.env.NODE_ENV == 'production'
 

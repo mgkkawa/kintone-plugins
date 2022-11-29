@@ -1,7 +1,79 @@
-.settings-heading {
-  padding: 1em 0;
+.container {
+  margin-top: 15px;
 }
 
-.kintoneplugin-input-text {
-  width: 20em;
+ul {
+  display: block;
+  /* list-style-type: disc; */
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  /* padding-inline-start: 40px; */
+}
+
+ul, ol {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+
+.tab-group {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.tab-group > li {
+    border: 1px solid #428bca;
+    border-radius: 4px;
+    position: relative;
+    float: left;
+    margin-bottom: 12px;
+}
+
+.tab-group > li.active > a, 
+.tab-group > li.active > a:hover, 
+.tab-group > li.active > a:focus {
+    background-color: #428bca;
+    color: #fff;
+}
+
+.tab-group li + li {
+    margin-left: -1px;
+}
+
+.tab-group > li:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+
+.tab-group > li:first-child {
+    margin-left: 0;
+}
+
+.tab-group > li:first-child:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.tab-group > li:last-child:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.tab-content>.tab-pane {
+  display: none;
+}
+
+.tab-content>.active {
+  display: block;
+}
+
+.history-application-settings > li{
+  display: inline-block;
 }
