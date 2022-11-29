@@ -24,3 +24,7 @@ export const getPhoneNumber = (str: string) => {
 
   return top + a + middle + a + bottum
 }
+
+export const checkUrl = (str: string) => {
+  return !str.match(/^https?:\/\/[\w!?/+\-_~=;.,*&@#$%()'[\]]+/)
+}

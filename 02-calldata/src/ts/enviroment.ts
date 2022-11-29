@@ -7,6 +7,9 @@ const dup2 = '番号重複レコード一覧2'
 const dup3 = '番号重複レコード一覧3'
 const his1 = 'コール履歴'
 const his2 = 'インバウンド履歴'
+const refOrigin = 'URL'
+const refChange = '会社概要'
+const refSpaceCd = 'reference-url'
 export const config = {
   appId: kintone.app.getId(),
   setting: setting,
@@ -18,6 +21,11 @@ export const config = {
     duplication2: dup2,
     duplication3: dup3,
     fields: [dup1, dup2, dup3, his1, his2]
+  },
+  referenceURL: {
+    origin: refOrigin,
+    change: refChange,
+    spaceCd: refSpaceCd
   },
   callhistory: {}
 }

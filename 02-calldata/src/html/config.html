@@ -1,16 +1,359 @@
-<section class="settings">
-  <h2 class="settings-heading">Settings for calldata</h2>
-  <p class="kintoneplugin-desc">This message is displayed on the app page after the app has been updated.</p>
-  <form class="js-submit-settings">
-    <p class="kintoneplugin-row">
-      <label for="message">
-        Message:
-        <input type="text" class="js-text-message kintoneplugin-input-text">
-      </label>
-    </p>
-    <p class="kintoneplugin-row">
-        <button type="button" class="js-cancel-button kintoneplugin-button-dialog-cancel">Cancel</button>
-        <button class="kintoneplugin-button-dialog-ok">Save</button>
-    </p>
-  </form>
-</section>
+<div class="ocean-page-market-app-html">
+  <div id="setting-screen" class="">
+    <!-- <div id="jbat-contribute"><a
+        href="https://form.kintoneapp.com/public/form/show/8bd7724847a93138b325663f3dcdfb3acd91e7ba9ce558f86cfec6a671c46cef"
+        target="_blank"><span id="jbat-contribute-sentence">ATTAZooの改善に協力する</span></a></div> -->
+    <div id="tabs" class="ui-tabs ui-corner-all ui-widget ui-widget-content">
+      <ul role="tablist" class="ui-tabs-nav ui-corner-all ui-helper-reset ui-helper-clearfix ui-widget-header">
+        <li role="tab" tabindex="0"
+          class="ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active"
+          aria-controls="tabs-1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true"><a href="#tabs-1"
+            role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-1">非表示設定</a></li>
+        <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-2"
+          aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a href="#tabs-2" role="presentation"
+            tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">編集不可設定</a></li>
+        <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3"
+          aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#tabs-3" role="presentation"
+            tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">入力必須設定</a></li>
+      </ul>
+      <div id="tabs-1" aria-labelledby="ui-id-1" role="tabpanel"
+        class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="false">
+        <div id="non-display">
+          <div class="kintoneplugin-input-checkbox jbat-checkbox"><span class="kintoneplugin-input-checkbox-item"><input
+                type="checkbox" id="non-display-check"><label class="jbat-label"
+                for="non-display-check">非表示機能を利用</label></span></div>
+          <table class="kintoneplugin-table jbat-table-outer">
+            <thead>
+              <tr>
+                <th class="kintoneplugin-table-th"><span class="title">条件対象フィールド</span></th>
+                <th class="kintoneplugin-table-th"><span class="title">条件式</span></th>
+                <th class="kintoneplugin-table-th"><span class="title">条件値</span></th>
+                <th class="kintoneplugin-table-th"><span class="title">非表示フィールド</span></th>
+                <th class="kintoneplugin-table-th-blankspace"></th>
+              </tr>
+            </thead>
+            <tbody class="non-display">
+              <tr class="base jbat-hide">
+                <td>
+                  <div class="kintoneplugin-table-td-control">
+                    <div class="kintoneplugin-table-td-control-value">
+                      <div class="kintoneplugin-select-outer">
+                        <div class="kintoneplugin-select"><select class="read-field"></select></div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="kintoneplugin-table-td-control">
+                    <div class="kintoneplugin-table-td-control-value">
+                      <div class="kintoneplugin-select-outer">
+                        <div class="kintoneplugin-select"><select class="sign"></select></div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class="jbat-input">
+                  <div class="kintoneplugin-table-td-cond-value">
+                    <div class="kintoneplugin-table-td-control">
+                      <div class="jbat-multi-field-control">
+                        <div class="jbat-number jbat-hide">
+                          <div class="kintoneplugin-table-td-control">
+                            <div class="kintoneplugin-table-td-control-value">
+                              <div class="kintoneplugin-input-outer"><input
+                                  class="kintoneplugin-input-text number-value" type="number"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="jbat-text jbat-hide">
+                          <div class="kintoneplugin-table-td-control">
+                            <div class="kintoneplugin-table-td-control-value">
+                              <div class="kintoneplugin-input-outer"><input class="kintoneplugin-input-text text-value"
+                                  type="text"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="jbat-list jbat-hide"></div>
+                        <div class="jbat-date jbat-hide jbat-value-block">
+                          <div class="kintoneplugin-table-td-control">
+                            <div class="kintoneplugin-table-td-control-value">
+                              <div class="kintoneplugin-input-outer"><input
+                                  class="kintoneplugin-input-text jbat-date-value" type="text"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="jbat-time jbat-hide jbat-value-block">
+                          <div class="kintoneplugin-table-td-control">
+                            <div class="kintoneplugin-table-td-control-value">
+                              <div class="kintoneplugin-input-outer"><input
+                                  class="kintoneplugin-input-text jbat-time-value" type="text"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="kintoneplugin-add-condition-operation jbat-hide"><button type="button"
+                          class="kintoneplugin-button-add-row-image add-cond" title="Add this condition"></button>
+                        <button type="button" class="kintoneplugin-button-remove-row-image remove-cond"
+                          title="Delete this condition"></button>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <table class="kintoneplugin-table jbat-table">
+                    <thead></thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="kintoneplugin-table-td-control">
+                            <div class="kintoneplugin-table-td-control-value">
+                              <div class="kintoneplugin-select-outer">
+                                <div class="kintoneplugin-select"><select class="target-field"></select></div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="kintoneplugin-table-td-operation"><button type="button"
+                            class="kintoneplugin-button-add-row-image add-in" title="Add row"></button> <button
+                            type="button" class="kintoneplugin-button-remove-row-image remove-in"
+                            title="Delete this row"></button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+                <td class="kintoneplugin-table-td-operation"><button type="button"
+                    class="kintoneplugin-button-add-row-image add" title="Add row"></button> <button type="button"
+                    class="kintoneplugin-button-remove-row-image remove" title="Delete this row"></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div id="tabs-2" aria-labelledby="ui-id-2" role="tabpanel"
+        class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="true" style="display: none;">
+        <div id="unable-edit">
+          <div class="kintoneplugin-input-checkbox jbat-checkbox"><span class="kintoneplugin-input-checkbox-item"><input
+                type="checkbox" id="unable-edit-check"><label class="jbat-label"
+                for="unable-edit-check">編集不可機能を利用</label></span></div>
+          <table class="kintoneplugin-table jbat-table-outer">
+            <thead>
+              <tr>
+                <th class="kintoneplugin-table-th"><span class="title">条件対象フィールド</span></th>
+                <th class="kintoneplugin-table-th"><span class="title">条件式</span></th>
+                <th class="kintoneplugin-table-th"><span class="title">条件値</span></th>
+                <th class="kintoneplugin-table-th"><span class="title">編集不可フィールド</span></th>
+                <th class="kintoneplugin-table-th-blankspace"></th>
+              </tr>
+            </thead>
+            <tbody class="unable-edit">
+              <tr class="base jbat-hide">
+                <td>
+                  <div class="kintoneplugin-table-td-control">
+                    <div class="kintoneplugin-table-td-control-value">
+                      <div class="kintoneplugin-select-outer">
+                        <div class="kintoneplugin-select"><select class="read-field"></select></div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="kintoneplugin-table-td-control">
+                    <div class="kintoneplugin-table-td-control-value">
+                      <div class="kintoneplugin-select-outer">
+                        <div class="kintoneplugin-select"><select class="sign"></select></div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class="jbat-input">
+                  <div class="kintoneplugin-table-td-cond-value">
+                    <div class="kintoneplugin-table-td-control">
+                      <div class="jbat-multi-field-control">
+                        <div class="jbat-number jbat-hide">
+                          <div class="kintoneplugin-table-td-control">
+                            <div class="kintoneplugin-table-td-control-value">
+                              <div class="kintoneplugin-input-outer"><input
+                                  class="kintoneplugin-input-text number-value" type="number"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="jbat-text jbat-hide">
+                          <div class="kintoneplugin-table-td-control">
+                            <div class="kintoneplugin-table-td-control-value">
+                              <div class="kintoneplugin-input-outer"><input class="kintoneplugin-input-text text-value"
+                                  type="text"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="jbat-list jbat-hide"></div>
+                        <div class="jbat-date jbat-hide jbat-value-block">
+                          <div class="kintoneplugin-table-td-control">
+                            <div class="kintoneplugin-table-td-control-value">
+                              <div class="kintoneplugin-input-outer"><input
+                                  class="kintoneplugin-input-text jbat-date-value" type="text"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="jbat-time jbat-hide jbat-value-block">
+                          <div class="kintoneplugin-table-td-control">
+                            <div class="kintoneplugin-table-td-control-value">
+                              <div class="kintoneplugin-input-outer"><input
+                                  class="kintoneplugin-input-text jbat-time-value" type="text"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="kintoneplugin-add-condition-operation jbat-hide"><button type="button"
+                          class="kintoneplugin-button-add-row-image add-cond" title="Add this condition"></button>
+                        <button type="button" class="kintoneplugin-button-remove-row-image remove-cond"
+                          title="Delete this condition"></button>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <table class="kintoneplugin-table jbat-table">
+                    <thead></thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="kintoneplugin-table-td-control">
+                            <div class="kintoneplugin-table-td-control-value">
+                              <div class="kintoneplugin-select-outer">
+                                <div class="kintoneplugin-select"><select class="target-field"></select></div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="kintoneplugin-table-td-operation"><button type="button"
+                            class="kintoneplugin-button-add-row-image add-in" title="Add row"></button> <button
+                            type="button" class="kintoneplugin-button-remove-row-image remove-in"
+                            title="Delete this row"></button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+                <td class="kintoneplugin-table-td-operation"><button type="button"
+                    class="kintoneplugin-button-add-row-image add" title="Add row"></button> <button type="button"
+                    class="kintoneplugin-button-remove-row-image remove" title="Delete this row"></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div id="tabs-3" aria-labelledby="ui-id-3" role="tabpanel"
+        class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="true" style="display: none;">
+        <div id="input-required">
+          <div class="kintoneplugin-input-checkbox jbat-checkbox"><span class="kintoneplugin-input-checkbox-item"><input
+                type="checkbox" id="input-required-check"><label class="jbat-label"
+                for="input-required-check">入力必須機能を利用</label></span></div>
+          <table class="kintoneplugin-table jbat-table-outer">
+            <thead>
+              <tr>
+                <th class="kintoneplugin-table-th"><span class="title">条件対象フィールド</span></th>
+                <th class="kintoneplugin-table-th"><span class="title">条件式</span></th>
+                <th class="kintoneplugin-table-th"><span class="title">条件値</span></th>
+                <th class="kintoneplugin-table-th"><span class="title">入力必須フィールド</span></th>
+                <th class="kintoneplugin-table-th-blankspace"></th>
+              </tr>
+            </thead>
+            <tbody class="input-required">
+              <tr class="base jbat-hide">
+                <td>
+                  <div class="kintoneplugin-table-td-control">
+                    <div class="kintoneplugin-table-td-control-value">
+                      <div class="kintoneplugin-select-outer">
+                        <div class="kintoneplugin-select"><select class="read-field"></select></div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="kintoneplugin-table-td-control">
+                    <div class="kintoneplugin-table-td-control-value">
+                      <div class="kintoneplugin-select-outer">
+                        <div class="kintoneplugin-select"><select class="sign"></select></div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class="jbat-input">
+                  <div class="kintoneplugin-table-td-cond-value">
+                    <div class="kintoneplugin-table-td-control">
+                      <div class="jbat-multi-field-control">
+                        <div class="jbat-number jbat-hide">
+                          <div class="kintoneplugin-table-td-control">
+                            <div class="kintoneplugin-table-td-control-value">
+                              <div class="kintoneplugin-input-outer"><input
+                                  class="kintoneplugin-input-text number-value" type="number"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="jbat-text jbat-hide">
+                          <div class="kintoneplugin-table-td-control">
+                            <div class="kintoneplugin-table-td-control-value">
+                              <div class="kintoneplugin-input-outer"><input class="kintoneplugin-input-text text-value"
+                                  type="text"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="jbat-list jbat-hide"></div>
+                        <div class="jbat-date jbat-hide jbat-value-block">
+                          <div class="kintoneplugin-table-td-control">
+                            <div class="kintoneplugin-table-td-control-value">
+                              <div class="kintoneplugin-input-outer"><input
+                                  class="kintoneplugin-input-text jbat-date-value" type="text"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="jbat-time jbat-hide jbat-value-block">
+                          <div class="kintoneplugin-table-td-control">
+                            <div class="kintoneplugin-table-td-control-value">
+                              <div class="kintoneplugin-input-outer"><input
+                                  class="kintoneplugin-input-text jbat-time-value" type="text"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="kintoneplugin-add-condition-operation jbat-hide"><button type="button"
+                          class="kintoneplugin-button-add-row-image add-cond" title="Add this condition"></button>
+                        <button type="button" class="kintoneplugin-button-remove-row-image remove-cond"
+                          title="Delete this condition"></button>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <table class="kintoneplugin-table jbat-table">
+                    <thead></thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="kintoneplugin-table-td-control">
+                            <div class="kintoneplugin-table-td-control-value">
+                              <div class="kintoneplugin-select-outer">
+                                <div class="kintoneplugin-select"><select class="target-field"></select></div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="kintoneplugin-table-td-operation"><button type="button"
+                            class="kintoneplugin-button-add-row-image add-in" title="Add row"></button> <button
+                            type="button" class="kintoneplugin-button-remove-row-image remove-in"
+                            title="Delete this row"></button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+                <td class="kintoneplugin-table-td-operation"><button type="button"
+                    class="kintoneplugin-button-add-row-image add" title="Add row"></button> <button type="button"
+                    class="kintoneplugin-button-remove-row-image remove" title="Delete this row"></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="jbat-div-block"><button type="button" class="kintoneplugin-button-dialog-cancel">キャンセル</button> <button
+        type="button" class="kintoneplugin-button-dialog-ok jbat-hide">保存する</button></div>
+  </div>
+</div>

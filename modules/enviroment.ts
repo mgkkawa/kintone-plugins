@@ -53,7 +53,8 @@ export const DISABLED_FIELDS: string[] = [
   '前期決算期',
   '前期売上高',
   '前期売上高億万',
-  'test'
+  'コール数',
+  'インバウンドコール数'
 ]
 
 export const HIDDEN_FIELDS: string[] = [

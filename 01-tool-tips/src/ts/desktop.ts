@@ -1,11 +1,12 @@
 import { getConfig, replaceEnter } from '.'
 import * as tag from '../../../modules/modern-class'
+import { events } from '../../../modules'
 
 jQuery.noConflict()
 ;(($, PLUGIN_ID) => {
   'use strict'
 
-  kintone.events.on(['app.record.detail.show', 'app.record.edit.show'], event => {
+  kintone.events.on(events.all3.show(), event => {
     const config = getConfig(PLUGIN_ID)
     console.log(config)
     if (!config.settings || !config.settings.length) return event
@@ -20,7 +21,7 @@ jQuery.noConflict()
 
     labels.each((i, e) => {
       const label = $(e)
-      const text = label.text()
+      const text: string = label.text().replace(/[*]$/, '')
       if (!fields.includes(text)) return
       const index = fields.indexOf(text)
       const tips = replaceEnter(settings[index].tips)

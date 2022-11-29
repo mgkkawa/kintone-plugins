@@ -30,8 +30,9 @@ export const kintoneDisabledField = (record, fieldCds: string | string[]) => {
  * ユーザー選択フィールドにはログインユーザーの情報をセット。
  * @param record event.record
  * @param fieldCds 値をリセットしたいフィールド。
+ * @param value
  */
-export const kintoneResetValue = (record, fieldCds: string | string[]) => {
+export const kintoneResetValue = (record, fieldCds: string | string[], value: string = '') => {
   if (typeof fieldCds === 'string') fieldCds = [fieldCds]
 
   const m = moment()
@@ -53,10 +54,18 @@ export const kintoneResetValue = (record, fieldCds: string | string[]) => {
       case 'USER_SELECT':
         field.value = [{ code: user.code, name: user.name }]
         break
-      case 'SINGLE_LINE_TEXT':
-        field.value = ''
+      case 'CHECK_BOX':
+      case 'MULTI_SELECT':
+      case 'ORGANIZATION_SELECT':
+      case 'GROUP_SELECT':
+      case 'FILE':
+      case 'SUBTABLE':
+        field.value = []
         break
-      case 'MULTI_LINE_TEXT':
+      case 'DROP_DOWN':
+        field.value = value
+        break
+      default:
         field.value = ''
         break
     }

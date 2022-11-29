@@ -1,18 +1,9 @@
 import { checkConfig, getConfig, getFields, getItems } from '.'
 import swal from 'sweetalert2'
-import { Button, Dropdown, Text, TextArea } from 'kintone-ui-component'
+import { Dropdown, TextArea } from 'kintone-ui-component'
 jQuery.noConflict()
 ;(async ($, PLUGIN_ID) => {
   'use strict'
-  // const config = {
-  //   settings: [
-  //     {
-  //       field: '完了ステータス',
-  //       tips: 'このフィールドの説明。<br>長さはどうかな？どこまでのびーる<br>長さはどうかな？どこまでのびーる<br>長さはどうかな？どこまでのびーる<br>長さはどうかな？どこまでのびーる<br>長さはどうかな？どこまでのびーる<br>長さはどうかな？どこまでのびーる<br>長さはどうかな？どこまでのびーる'
-  //     },
-  //     { field: '完了詳細', tips: 'このフィールドの説明。<br>長さはどうかな？どこまでのびーる' }
-  //   ]
-  // }
   const config = getConfig(PLUGIN_ID)
   if (!config.appId) config.appId = kintone.app.getId()
   console.log(config)
