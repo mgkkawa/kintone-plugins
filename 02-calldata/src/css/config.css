@@ -2,6 +2,11 @@
   margin-top: 15px;
 }
 
+h2{
+  background-color: #e2f2fe;
+  margin-bottom: 8px;
+}
+
 ul {
   display: block;
   /* list-style-type: disc; */
@@ -76,4 +81,40 @@ ul, ol {
 
 .history-application-settings > li{
   display: inline-block;
+}
+
+/* .kintoneplugin-title{
+  padding: 8px 8px 8px 8px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid #428bca;
+  position: relative;
+  float: left;
+} */
+
+kuc-drop-down,
+kuc-text-1-7-0{
+  margin-left: 8px;
+}
+
+table{
+  table-layout: fixed;
+  display: table;
+}
+
+tbody.coop-app > tr > td {
+  /* display: inline-block; */
+  padding: 8px 8px 8px 8px;
+  font-size: 16px;
+  font-weight: bold;
+  /* text-align: center; */
+  /* border: 1px solid #428bca; */
+  /* border-radius: 4px; */
+  position: relative;
+  float: left;
+}
+
+.token{
+  width: 320px;
 }

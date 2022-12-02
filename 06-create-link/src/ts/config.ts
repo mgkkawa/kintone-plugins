@@ -1,27 +1,78 @@
+import { Dropdown, Text, TextArea } from 'kintone-ui-component'
+import Swal from 'sweetalert2'
+import * as m from '../../../modules'
 jQuery.noConflict()
-
-;(function ($, PLUGIN_ID) {
+;(async ($, PLUGIN_ID) => {
   'use strict'
 
-  var $form = $('.js-submit-settings')
-  var $cancelButton = $('.js-cancel-button')
-  var $message = $('.js-text-message')
-  if (!($form.length > 0 && $cancelButton.length > 0 && $message.length > 0)) {
-    throw new Error('Required elements do not exist.')
-  }
-  var config = kintone.plugin.app.getConfig(PLUGIN_ID)
+  const config = m.getConfig(PLUGIN_ID)
+  if (!config.appId) config.appId = kintone.app.getId()
+  console.log(config)
 
-  if (config.message) {
-    $message.val(config.message)
+  const appId = config.appId
+  const submit = $('#config-submit')
+  const cancel = $('.js-cancel-button')
+
+  if (!config.spaces) {
+    const spaces = []
+    const layout = await m.getLayout(appId)
+    const rows = layout.layout
+    rows.forEach(row => {
+      const fields = row.fields
+      fields.forEach(field => {
+        if (field.type == 'SPACER' && field.elementId) spaces.push(field.elementId)
+      })
+    })
+    config.spaces = spaces
   }
-  $form.on('submit', function (e) {
+  console.log(config.spaces)
+  const items = config.spaces.map(space => {
+    return { label: space, value: space }
+  })
+  items.unshift({ label: '-----', value: '-----' })
+
+  const spaces = new Dropdown({
+    items: items,
+    selectedIndex: 0,
+    className: 'kintone-ui space-elementId'
+  })
+
+  const current = new Dropdown({
+    items: [
+      { label: '-----', value: '-----' },
+      { label: 'URL', value: 'URL' },
+      { label: 'TEL', value: 'tel' }
+    ],
+    selectedIndex: 0,
+    className: 'kintone-ui link-current'
+  })
+
+  const link = new Text({ className: 'kintone-ui link-value' })
+
+  const $configs = $('#configs')
+
+  $configs.append($(m.tr).append($(m.th).append($(m.td).append(spaces).append(current).append(link))))
+
+  submit.on('click', e => {
     e.preventDefault()
-    kintone.plugin.app.setConfig({ message: $message.val() }, function () {
-      alert('The plug-in settings have been saved. Please update the app!')
-      window.location.href = '../../flow?app=' + kintone.app.getId()
+
+    const td = $configs.children().children().children()
+    const elementIds = td.children('.space-elementId')
+    const currents = td.children('.link-current')
+    const values = td.children('.link-value')
+    const all = $configs.children('.kintone-ui')
+
+    console.log(elementIds.val())
+
+    const setting = { elementId: elementIds.val(), current: currents.val(), value: values.val() }
+    config.setting = setting
+
+    kintone.plugin.app.setConfig(m.checkConfig(config), async () => {
+      await Swal.fire({ html: 'プラグイン設定が保存されました。<br>アプリの更新も忘れずに！' })
+      window.location.href = '../../flow?app=' + config.appId
     })
   })
-  $cancelButton.on('click', function () {
-    window.location.href = '../../' + kintone.app.getId() + '/plugin/'
+  cancel.on('click', () => {
+    window.location.href = '../../' + config.appId + '/plugin/'
   })
 })(jQuery, kintone.$PLUGIN_ID)

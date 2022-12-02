@@ -238,11 +238,9 @@ export const allPuts = async (appId, records, updateKey) => {
 
   await kintone
     .api(url, 'PUT', body)
-    .then(resp => {
-      console.log(resp)
-    })
+    .then(resp => resp)
     .catch(async error => {
-      const row1 = '<div><b>レコードの更新が出来ませんでした。</b></div>'
+      const row1 = '<h2><b>レコードの更新が出来ませんでした。</b></h2>'
       const row2 = `<div>${error.message}</div>`
       await Swal.fire({
         icon: 'error',
@@ -250,6 +248,12 @@ export const allPuts = async (appId, records, updateKey) => {
       })
       console.log(error)
     })
+
+  if (next.length) {
+    await allPuts(appId, next, updateKey)
+  } else {
+    console.log('PUT COMPLETE!!')
+  }
 }
 
 export const allPosts = async (appId, records, token) => {
@@ -306,4 +310,38 @@ export const allPosts = async (appId, records, token) => {
     })
 
   if (next.length) await allPosts(appId, next, token)
+}
+
+export const getLayout = async appId => {
+  return await kintone
+    .api(kintone.api.url('/k/v1/app/form/layout', true), 'GET', { app: appId })
+    .then(resp => resp)
+    .catch(error => error)
+}
+
+export const getCallCount = async (
+  params: { appId: number; token: string; serialNo: string; caseName: string },
+  isInbound: boolean = false
+) => {
+  const app = '?app=' + params.appId
+  const query = `法人番号 = "${params.serialNo}" and 案件名 = "${params.caseName}" and inout = "${
+    isInbound ? 'in' : 'out'
+  }"`
+  const totalCount = '&totalCount=true'
+  const url = kintone.api.url('/k/v1/records', true) + app + '&query=' + encodeURI(query) + totalCount
+  const headers = getHeaders(params.token)
+
+  return await kintone
+    .proxy(url, 'GET', headers, {})
+    .then(resp => {
+      const object = JSON.parse(resp[0])
+      console.log(object)
+      if (object.message) throw new Error(object.error)
+      return object.totalCount - 0
+    })
+    .catch(resp => {
+      console.log('GET Error')
+      console.log(resp)
+      return 0
+    })
 }

@@ -17,9 +17,9 @@ export const createPhoneLink = (spaceCd, phone) => {
   space.html(label + link)
 }
 
-export const createWebLink = (spaceCd, url) => {
+export const createWebLink = (spaceCd, url, labelName = 'URL') => {
   const space = getSpace(spaceCd)
-  const label: string = getLabel('会社概要URL')
+  const label: string = getLabel(labelName)
   const link: string = `<div class="phone-link"><a href="${url}" target="_blank">${url}</a></div>`
   space.html(label + link)
 }

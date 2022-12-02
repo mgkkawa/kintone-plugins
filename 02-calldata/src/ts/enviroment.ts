@@ -1,4 +1,4 @@
-const setting = ['日付', '時刻', 'MG担当者', 'コールメモ']
+const setting = ['インバウンド', '日付', '時刻', 'MG担当者', 'コールメモ']
 const origin = '電話番号'
 const change = '次回電話番号'
 const spaceCd = 'phone-link'
@@ -27,5 +27,12 @@ export const config = {
     change: refChange,
     spaceCd: refSpaceCd
   },
-  callhistory: {}
+  callhistory: {
+    appId: 427,
+    token: 'b2B44Bj2bxeN63gpQom2UEnwXlJ9fIdiF3tBItfD'
+  },
+  latest: {
+    appId: 435,
+    token: 'PUn7FwnTulz6N6lRpNVKIqTG2DyH3s5q3gNXc8lh'
+  }
 }

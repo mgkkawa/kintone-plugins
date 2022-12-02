@@ -14,7 +14,7 @@ const plugin3 = '03-callhistory'
 const plugin4 = '04-latest-data'
 const plugin5 = '05-phone-check'
 const plugin6 = '06-create-link'
-const directory = plugin6
+const directory = plugin2
 
 const isProduction = process.env.NODE_ENV == 'production'
 

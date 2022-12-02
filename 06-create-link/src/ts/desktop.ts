@@ -1,26 +1,14 @@
+import * as m from '../../../modules'
 jQuery.noConflict()
-
 ;(function ($, PLUGIN_ID) {
   'use strict'
+  const config = m.getConfig(PLUGIN_ID)
+  console.log(config)
 
-  kintone.events.on('app.record.index.show', function () {
-    var config = kintone.plugin.app.getConfig(PLUGIN_ID)
+  if (!config.setting) return
+  const setting = config.setting
 
-    var spaceElement = kintone.app.getHeaderSpaceElement()
-    if (spaceElement === null) {
-      throw new Error('The header element is unavailable on this page')
-    }
-    var fragment = document.createDocumentFragment()
-    var headingEl = document.createElement('h3')
-    var messageEl = document.createElement('p')
-
-    messageEl.classList.add('plugin-space-message')
-    messageEl.textContent = config.message
-    headingEl.classList.add('plugin-space-heading')
-    headingEl.textContent = 'Hello kintone plugin!'
-
-    fragment.appendChild(headingEl)
-    fragment.appendChild(messageEl)
-    spaceElement.appendChild(fragment)
+  kintone.events.on(m.events.all3.show(), async e => {
+    m.createWebLink(setting.elementId, setting.value)
   })
 })(jQuery, kintone.$PLUGIN_ID)
