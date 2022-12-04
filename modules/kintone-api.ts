@@ -2,7 +2,7 @@ import Swal from 'sweetalert2'
 import { DELETE_KEYS } from '.'
 export const getHeaders = (token, isContentType = false) => {
   const headers = {
-    'X-Cybozu-API-Token': token
+    'X-Cybozu-API-Token': token,
   }
   if (isContentType) headers['Content-Type'] = 'application/json'
   return headers
@@ -69,7 +69,7 @@ export const getRecords = (appId, offset = 0, limit = 500, opt_records = null) =
   const url = kintone.api.url('/k/v1/records', true)
   const params = {
     app: appId,
-    query: `order by レコード番号 asc limit ${limit} offset ${offset}`
+    query: `order by レコード番号 asc limit ${limit} offset ${offset}`,
   }
 
   return kintone
@@ -104,7 +104,7 @@ export const postAll = async (appId, token, records) => {
   const url = kintone.api.url('/k/v1/records', true)
   const params = {
     app: appId - 0,
-    records: post_records
+    records: post_records,
   }
   console.log(params)
   await kintone
@@ -133,7 +133,7 @@ export const putAll = async (appId, records) => {
 
   const params = {
     app: appId,
-    records: put_records
+    records: put_records,
   }
 
   await kintone
@@ -150,7 +150,7 @@ export const post = async (appId, record) => {
   const url = kintone.api.url('/k/v1/record', true)
   const body = {
     app: appId,
-    record: record
+    record: record,
   }
   return await kintone.api(url, 'POST', body).catch(error => error)
 }
@@ -168,7 +168,7 @@ export const allPost = async (appId, token, records) => {
   const url = kintone.api.url('/k/v1/records', true)
   const body = {
     app: appId,
-    records: posts
+    records: posts,
   }
 
   await kintone
@@ -185,7 +185,7 @@ export const allPost = async (appId, token, records) => {
       for (let record of records) {
         const body = {
           app: appId,
-          record: record
+          record: record,
         }
 
         await kintone
@@ -215,9 +215,9 @@ export const allPuts = async (appId, records, updateKey) => {
     const obj = {
       updateKey: {
         field: updateKey,
-        value: null
+        value: null,
       },
-      record: record_
+      record: record_,
     }
 
     for (let key in record_) {
@@ -233,7 +233,7 @@ export const allPuts = async (appId, records, updateKey) => {
   const url = kintone.api.url('/k/v1/records', true)
   const body = {
     app: appId,
-    records: puts
+    records: puts,
   }
 
   await kintone
@@ -244,7 +244,7 @@ export const allPuts = async (appId, records, updateKey) => {
       const row2 = `<div>${error.message}</div>`
       await Swal.fire({
         icon: 'error',
-        html: row1 + row2
+        html: row1 + row2,
       })
       console.log(error)
     })
@@ -292,9 +292,9 @@ export const allPosts = async (appId, records, token) => {
         return {
           updateKey: {
             field: '法人番号',
-            value: serial
+            value: serial,
           },
-          record: record
+          record: record,
         }
       })
 

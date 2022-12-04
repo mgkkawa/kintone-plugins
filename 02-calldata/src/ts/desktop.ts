@@ -13,6 +13,8 @@ jQuery.noConflict()
   kintone.events.on(m.events.index.show(), async event => {
     console.log(event)
 
+    if (event.viewName != 'リスト取り込み') return event
+
     const space = $('.kintone-app-headermenu-space')
     space.append(new Button({ text: 'リスト作成', className: 'list-button' }))
     $(document).on('click', '.list-button', async e => {
@@ -22,11 +24,11 @@ jQuery.noConflict()
         html: '<div><b>リストを作成しますか？</b></div>',
         confirmButtonText: 'はい',
         showCancelButton: true,
-        cancelButtonText: 'いいえ'
+        cancelButtonText: 'いいえ',
       })
       if (check.isDismissed) {
         await Swal.fire({
-          html: '<div><b>リスト作成を中断しました。</b></div>'
+          html: '<div><b>リスト作成を中断しました。</b></div>',
         })
         return
       }
@@ -63,6 +65,7 @@ jQuery.noConflict()
             record.前々期売上高億万.value = m.toJaNum(record.前々期売上高.value) + '円'
             record.前期売上高億万.value = m.toJaNum(record.前期売上高.value) + '円'
             record.案件名.value = info.name
+            record.inout.value = 'out'
             if (duplicate.length) {
               record.事前備考.value = '番号重複企業あり。'
               duplist.push(record)
@@ -89,7 +92,7 @@ jQuery.noConflict()
           await m.allPuts(event.appId, result, '法人番号')
 
           Swal.close()
-        }
+        },
       })
 
       await Swal.fire({
@@ -99,7 +102,7 @@ jQuery.noConflict()
         showCancelButton: false,
         showDenyButton: false,
         allowOutsideClick: true,
-        allowEscapeKey: true
+        allowEscapeKey: true,
       })
     })
     return event
@@ -134,12 +137,13 @@ jQuery.noConflict()
         '完了詳細',
         'NG詳細',
         'NGその他',
-        '編集ステータス'
+        '編集ステータス',
       ])
       r.完了ステータス.value = '確認中'
       r.完了日.value = ''
       r.完了時担当者.value = []
     }
+    m.kintoneResetValue(r, ['担当者取次', '不通詳細'])
     const setting = config.setting
     if (r.インバウンドコール数.value != '' && r.インバウンドコール数.value != 0) {
       const html = '<h2 class="popup-title"><b>インバウンド履歴あり</b></h2><div>内容確認後に架電してください。</div>'
@@ -170,7 +174,7 @@ jQuery.noConflict()
         appId: history.appId,
         token: history.token,
         serialNo: r.法人番号.value,
-        caseName: r.案件名.value
+        caseName: r.案件名.value,
       }
 
       const count = await m.getCallCount(params)
@@ -288,12 +292,36 @@ jQuery.noConflict()
 
   kintone.events.on(m.events.edit.change('不通詳細'), event => {
     // コール音, コール前音, 話し中, 留守電, 現アナ, FAX, 音声ガイダンス, その他
+    const detail = ['コール音', 'コール前音', '話し中', '留守電', '現アナ', 'FAX', '音声ガイダンス']
+    const r = event.record
+    const f = event.changes.field
+    const v = f.value
+    const isOther = v == 'その他'
+
+    m.kintoneFieldShown('不通その他', isOther)
+
+    const errors = ['現アナ', 'FAX', '音声ガイダンス']
+    if ((v && r.コール数.value >= 3) || errors.includes(v)) r.完了ステータス.value = '完了'
+    if (!isOther) {
+      const memo = r.コールメモ.value
+      const txt = detail.includes(memo)
+      r.コールメモ.value = txt ? v : memo ? memo + '\n' + v : v
+    }
+
+    return event
+  })
+
+  kintone.events.on(m.events.edit.change('不通その他'), event => {
+    const detail = ['コール音', 'コール前音', '話し中', '留守電', '現アナ', 'FAX', '音声ガイダンス']
     const r = event.record
     const f = event.changes.field
     const v = f.value
 
-    const errors = ['現アナ', 'FAX', '音声ガイダンス']
-    if (r.コール数.value >= 3 || errors.includes(v)) r.完了ステータス.value = '完了'
+    if (v) {
+      const memo = r.コールメモ.value
+      const txt = detail.includes(memo)
+      r.コールメモ.value = txt ? v : memo ? memo + '\n' + v : v
+    }
 
     return event
   })
@@ -343,6 +371,11 @@ jQuery.noConflict()
       r.NG詳細.value = '不通'
       return event
     }
+
+    if (r.担当者取次.value == '不通' && r.コール数.value >= 3) {
+      r.NG詳細.value = '不通'
+      return event
+    }
   })
 
   kintone.events.on(m.events.edit.change('決算期'), event => {
@@ -372,8 +405,19 @@ jQuery.noConflict()
         title: '取得値は合っていますか？',
         html: m.getSalesHtml(prevSales, sales, ratio),
         icon: 'warning',
-        allowOutsideClick: false
+        allowOutsideClick: false,
       })
     }
+  })
+
+  kintone.events.on(m.events.edit.change('売上記載URL'), event => {
+    const f = event.changes.field
+    const v = f.value
+
+    f.error = null
+    if (!v) return event
+    if (m.checkUrl(v)) f.error = '正しいURLを入力してください。'
+
+    return event
   })
 })(jQuery, kintone.$PLUGIN_ID)

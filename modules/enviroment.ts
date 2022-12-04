@@ -6,7 +6,7 @@ export const DELETE_FIELDS = [
   '作成者',
   '作業者',
   '更新日時',
-  '更新者'
+  '更新者',
 ]
 
 export const DELETE_TYPES = [
@@ -16,7 +16,7 @@ export const DELETE_TYPES = [
   'MODIFIER',
   '__ID__',
   'CREATED_TIME',
-  'UPDATED_TIME'
+  'UPDATED_TIME',
 ]
 export const DELETE_KEYS = [
   'RECORD_NUMBER',
@@ -27,7 +27,7 @@ export const DELETE_KEYS = [
   'STATUS',
   'STATUS_ASSIGNEE',
   'REFERENCE_TABLE',
-  'MODIFIER'
+  'MODIFIER',
 ]
 
 export const DISABLED_FIELDS: string[] = [
@@ -54,7 +54,7 @@ export const DISABLED_FIELDS: string[] = [
   '前期売上高',
   '前期売上高億万',
   'コール数',
-  'インバウンドコール数'
+  'インバウンドコール数',
 ]
 
 export const HIDDEN_FIELDS: string[] = [
@@ -83,11 +83,12 @@ export const HIDDEN_FIELDS: string[] = [
   'NG詳細',
   'NGその他',
   '不通詳細',
+  '不通その他',
   '完了日',
   '完了時担当者',
   'コール数',
   'インバウンドコール数',
-  '数値表現売上高'
+  '数値表現売上高',
 ]
 
 export const DEFAULT_ITEM = { label: '-----', value: '-----' }
