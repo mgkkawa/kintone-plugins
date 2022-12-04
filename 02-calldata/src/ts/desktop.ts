@@ -268,8 +268,10 @@ jQuery.noConflict()
     if (isManager) {
       const isSales = r.売上高.value > 1
       const isUrl = r.売上記載URL.value
+      const isAnswer = r.業界.value || r.景気動向.value != '無回答'
 
       if (isSales || isUrl) r.終話タイミング.value = '売上高回答、クロージングまで'
+      if ((!isSales || !isUrl) && isAnswer) r.終話タイミング.value = '売上高の開示は拒み終話'
     }
     return event
   })
