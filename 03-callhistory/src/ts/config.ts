@@ -1,7 +1,7 @@
 import swal from 'sweetalert2'
 import { Button, Dropdown, Text } from 'kintone-ui-component'
 import * as modules from '../modules'
-import * as plugins from '../../../modules/functions'
+import * as plugins from '../../../modules'
 import { CALLHISTORY_DEFAULT } from '../modules'
 jQuery.noConflict()
 ;(async ($, PLUGIN_ID) => {
@@ -92,7 +92,7 @@ jQuery.noConflict()
   $('#config-desc').html('コールアプリ側の設定<br>設定がなければ空白を保存します。')
 
   if (!config.fields) config.fields = await plugins.getFields(config.appId)
-  if (!config.fields2) config.fields2 = await modules.getFields(history.appId)
+  if (!config.fields2) config.fields2 = await plugins.getFields(history.appId)
   const fields = config.fields
 
   const apps = $('#callapp-configs')

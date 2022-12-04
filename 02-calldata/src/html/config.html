@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="tabbable">
+        <ul class="nav tab-group">
+          <!--nav-tabs nav-justified-->
+          <li class="active"><a href="#coop-app" data-toggle="tab">連携アプリ設定</a></li>
+          <li class=""><a href="#disable" data-toggle="tab">編集不可設定</a></li>
+          <li class=""><a href="#hidden" data-toggle="tab">非表示設定</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="coop-app">
+            <div class="kintoneplugin-input-checkbox">
+              <span class="kintoneplugin-input-checkbox-item">
+                <input type="checkbox" name="checkbox" value="0" id="checkbox-0">
+                <label for="checkbox-0">アプリ連携機能を利用する</label>
+              </span>
+            </div>
+            <div class="kintoneplugin-row"></div>
+            <h2> コール履歴アプリ設定 </h2>
+            <p class="kintoneplugin-desc">コール履歴アプリとの連携設定。</p>
+            <div class="history-app"></div>
+            <div class="kintoneplugin-row"></div>
+            <h2> 過去データアプリ設定 </h2>
+            <p class="kintoneplugin-desc">過去データアプリとの連携設定。</p>
+            <div class="latest-app"></div>
+          </div>
+          <div class="tab-pane" id="disable">
+            <div class="kintoneplugin-input-checkbox">
+              <span class="kintoneplugin-input-checkbox-item">
+                <input type="checkbox" name="checkbox" value="0" id="checkbox-1">
+                <label for="checkbox-0">編集不可機能を利用する</label>
+              </span>
+            </div>
+            <div class="kintoneplugin-row"></div>
+            <h2> 編集不可設定 </h2>
+            <p class="kintoneplugin-desc">編集を許可しないフィールドを設定出来ます。</p>
+            <div class="disable-settings">
+              <table class="kintoneplugin-table">
+                <thead>
+                  <tr>
+                    <th class="kintoneplugin-table-th"><span class="title">フィールド選択</span></th>
+                    <th class="kintoneplugin-table-th-blankspace"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="kintoneplugin-table-td-control">
+                        <div class="kintoneplugin-table-td-control-value fields-dropdown">
+                        </div>
+                      </div>
+                    </td>
+                    <td class="kintoneplugin-table-td-operation">
+                      <button type="button" class="kintoneplugin-button-add-row-image" title="Add row"></button>
+                      <button type="button" class="kintoneplugin-button-remove-row-image"
+                        title="Delete this row"></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="fields-dropdown"></div>
+            <div class="fields-dropdown"></div>
+          </div>
+          <div class="tab-pane" id="hidden">
+            <div class="kintoneplugin-input-checkbox">
+              <span class="kintoneplugin-input-checkbox-item">
+                <input type="checkbox" name="checkbox" value="0" id="checkbox-2">
+                <label for="checkbox-0">非表示機能を利用する</label>
+              </span>
+            </div>
+            <div class="kintoneplugin-row"></div>
+            <h2> 非表示設定 </h2>
+            <p class="kintoneplugin-desc">非表示にするフィールドを設定出来ます。</p>
+            <div class="hidden-settings"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script
+  src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRefreshCSS-550eae0ce567d3d9182e33cee4e187761056020161aa87e3ef74dc467972c555.js"></script>

@@ -2,7 +2,9 @@ import swal from 'sweetalert2'
 import * as kuc from 'kintone-ui-component'
 import * as m from '../../../modules'
 import * as tag from '../../../modules/modern-class'
-// import * as rest from '../../../modules/rest-body'
+
+// リスト初期化と過去データへの転送機能は作成完了。
+// コール終わってからの設定やらなんやらは手つかず。
 
 jQuery.noConflict()
 ;(async ($, PLUGIN_ID) => {
@@ -11,7 +13,6 @@ jQuery.noConflict()
   const $submit = $('#submit-button')
   const $cancel = $('.js-cancel-button')
 
-  // const config = { app: null, latest: null, settings: null }
   const config = m.getConfig(PLUGIN_ID)
 
   if (!config.app) {
@@ -29,14 +30,12 @@ jQuery.noConflict()
   }
 
   const appId = config.app.appId
-  const appName = config.app.nam
 
   for (let key in config) {
     const prop = config[key]
     if (typeof prop === 'string') config[key] = m.parse(prop)
   }
 
-  console.log(config)
   const spaceApps = await m.getApps(appId)
   const items = spaceApps.map(app => {
     return { label: app.name, value: app.appId }
@@ -149,9 +148,8 @@ jQuery.noConflict()
   $submit.on('click', async e => {
     e.preventDefault()
 
-    // 値の取得から考え直し。
     let isError = false
-    const settings = {}
+    const settings = []
     $('.config-settings').each((_index, e) => {
       const element = $(e)
       const field = element.children('.settings-field').children().val().toString()
@@ -161,7 +159,7 @@ jQuery.noConflict()
         isError = true
         return false
       }
-      settings[field] = value
+      settings.push({ [field]: value })
     })
 
     if (isError) {

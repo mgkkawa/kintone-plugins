@@ -1,6 +1,7 @@
 import Swal from 'sweetalert2'
 import { DELETE_KEYS } from '../03-callhistory/src/modules'
 
+<<<<<<< HEAD
 export const replaceEnter = str => {
   return str.replace(/\n|\r\n|\r/g, '<br>')
 }
@@ -177,6 +178,18 @@ export const putAll = async (appId, records) => {
   if (next_records.length) {
     await putAll(appId, next_records)
   }
+=======
+export const compCheck = async html => {
+  return await Swal.fire({
+    html: html,
+    confirmButtonText: 'はい',
+    showCancelButton: true,
+    cancelButtonText: 'いいえ',
+    allowEnterKey: false,
+    allowEscapeKey: false,
+    allowOutsideClick: false
+  })
+>>>>>>> c47b1ce3b18a70983b20fe90cef2f5565ca576dd
 }
 
 export const getItems = (fields, isField = false) => {
@@ -259,6 +272,7 @@ export const parse = s => {
   return JSON.parse(s)
 }
 
+<<<<<<< HEAD
 export const post = async (appId, record) => {
   const url = kintone.api.url('/k/v1/record', true)
   const body = {
@@ -351,10 +365,22 @@ export const allPuts = async (appId, records, updateKey) => {
 
   await kintone
     .api(url, 'PUT', body)
-    .then(resp => {
-      console.log('then')
-      console.log(resp)
+=======
+export const duplicationPhoneCheck = async (event, phoneset, value) => {
+  const origin = phoneset.origin
+  const change = phoneset.change
+  return await kintone
+    .api(kintone.api.url('/k/v1/records', true), 'GET', {
+      app: kintone.app.getId(),
+      query: `${origin} = "${value}" or ${change} = "${value}"`,
+      totalCount: true
     })
+>>>>>>> c47b1ce3b18a70983b20fe90cef2f5565ca576dd
+    .then(resp => {
+      console.log(resp)
+      return resp.totalCount
+    })
+<<<<<<< HEAD
     .catch(async error => {
       const row1 = '<div><b>レコードの更新が出来ませんでした。</b></div>'
       const row2 = `<div>${error.message}</div>`
@@ -364,33 +390,75 @@ export const allPuts = async (appId, records, updateKey) => {
       })
       console.log(error)
     })
+=======
+    .catch(error => console.log(error))
+>>>>>>> c47b1ce3b18a70983b20fe90cef2f5565ca576dd
 }
 
-export const allPosts = async (appId, records, token) => {
-  const posts = []
-  const next = []
-
-  records.forEach((record, index) => {
-    index < 100 ? posts.push(record) : next.push(record)
+export const duplicationPopup = async phone => {
+  await Swal.fire({
+    html: `<div><b>${phone}は重複があります。</b></div>`
   })
+}
 
-  const url = kintone.api.url('/k/v1/records', true)
-  const body = { app: appId, records: posts }
-  const headers = getHeaders(token, true)
+export const checkPostNumber = value => value == '000-0000' || !value.match(/^[0-9]{3}-?[0-9]{4}$/)
 
-  await kintone
-    .proxy(url, 'POST', headers, body)
-    .then(resp => {
-      const obj = JSON.parse(resp[0])
-      console.log(obj)
-      if (obj.message) throw new Error(JSON.stringify(obj))
-    })
-    .catch(error => {
-      error = JSON.parse(error.message)
-      const errors = error.errors
-      const records = errors.records
-      records.forEach(record => {
-        console.log(record)
-      })
-    })
+export const checkMailAddress = value =>
+  !value.match(/^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/)
+
+export const toJaNum = num => {
+  if (typeof num === 'number') {
+    num = num.toString()
+  }
+
+  num = num.replace(/[, ]/g, '')
+
+  let prefix = ''
+
+  if (num[0] === '-') {
+    num = num.slice(1)
+    prefix = '-'
+  }
+
+  return (
+    prefix +
+    num
+      .slice(0, -12)
+      .replace(/^0+/, '')
+      .replace(/([0-9]+)/g, '$1兆') +
+    num
+      .slice(-12, -8)
+      .replace(/^0+/, '')
+      .replace(/([0-9]+)/g, '$1億') +
+    num
+      .slice(-8, -4)
+      .replace(/^0+/, '')
+      .replace(/([0-9]+)/g, '$1万') +
+    num.substring(num.length - 4).replace(/^0+/, '')
+  )
+}
+
+export const hankaku2Zenkaku = (str: string) => {
+  return str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (s) {
+    return String.fromCharCode(s.charCodeAt(0) - 0xfee0)
+  })
+}
+
+export const getSalesHtml = (prevSales, sales, ratio) => {
+  const h2 = '<h2 class="popup-title">'
+  const h2close = '</h2>'
+
+  let html = h2 + '推測値と大幅に乖離しています。' + h2close
+  html += `<div>前期売上高（億万）：${toJaNum(prevSales)}</div>`
+  html += `<div>取得売上高（億万）：${toJaNum(sales)}</div>`
+  html += `<div>前期売上高：${prevSales}</div>`
+  html += `<div>取得売上高：${sales}</div>`
+  html += `<div>比率${ratio}</div>`
+
+  return html
+}
+
+export const checkValue = (value, arg) => {
+  if (value == undefined) return false
+  return !!value.match(arg)
 }

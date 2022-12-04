@@ -1,0 +1,33 @@
+.plugin-space-heading {
+  font-size: 1.5rem;
+  margin: 0.8rem;
+}
+.plugin-space-message {
+  display: inline-block;
+  font-size: 1.2em;
+  margin: 0.8rem;
+  margin-top: 0;
+}
+
+.phone-link{
+  position: relative;
+  display: inline-block;
+  line-height: 2.2;
+  font-size: 16px;
+  padding: 0px 8px;
+  margin: 4px 0px;
+  width: 200px;
+  height: 38px;
+  /* background-color: #d4d7d7; */
+  box-shadow: none;
+  border: 1px solid #e3e7e8;
+  text-shadow: #e3e7e8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.popup-title{
+  font-weight: bold;
+  font-size: 24px;
+}

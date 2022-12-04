@@ -81,3 +81,7 @@ kuc-dropdown-1-7-0{
 .kuc-dropdown-1-7-0__group__select-menu__item{
   position: absolute;
 }
+
+#fields-dropdown > kuc-dropdown-1-7-0 {
+  position: absolute;
+}
