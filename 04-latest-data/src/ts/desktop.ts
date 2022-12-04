@@ -87,7 +87,7 @@ jQuery.noConflict()
           // await m.allPost(latest.app, latest.token, records)
 
           swal.close()
-        }
+        },
       })
 
       // await swal.fire({

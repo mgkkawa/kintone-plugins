@@ -6,8 +6,8 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 
-const directory = '01-tool-tips'
-// const directory = '04-latest-data'
+// const directory = '01-tool-tips'
+const directory = '04-latest-data'
 // const CompressionPlugin = require('compression-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
